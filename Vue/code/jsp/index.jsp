@@ -1,0 +1,143 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Vue Index</title>
+		<link rel = "stylesheet" href = "<%=basePath%>css/bootstrap.min.css" media="screen"/>
+		<script type = "text/javascript" src = "<%=basePath%>js/jquery-1.11.3.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "<%=basePath%>js/popper.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "<%=basePath%>js/bootstrap.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "<%=basePath%>js/vue.js" charset="UTF-8"></script>
+	</head>
+	<body>
+		<div class = "container"><br>
+			<div class = "row">
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body" id = "app1">
+							<span v-bind:title="tip">{{message}}</span>
+							<span v-if="seen">Now you can see me.</span><br>
+							<button onclick = "hide();" type = "button" class = "btn btn-primary">Hide</button>
+						</div>
+					</div>
+				</div>
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body" id = "app2">
+							<ol>
+								<li v-for = "todo in todos">{{todo.text}}</li>
+							</ol>
+							<select class = "form-control">
+								<option v-for = "o in options" value = "{{o.v}}">{{o.t}}</option>
+							</select><br>
+							<button onclick = "add();" class = "btn btn-primary">Add</button>
+						</div>
+					</div>
+				</div>
+			</div><br>
+			<div class = "row">
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body" id = "app3">
+							<p>{{message}}</p>
+							<button v-on:click = "reverse" class = "btn btn-primary">Reverse</button>
+						</div>
+					</div>
+				</div>
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body" id = "app4">
+							<p>{{message}}</p>
+							<input v-model = "message" class = "form-control"/>
+						</div>
+					</div>
+				</div>
+			</div><br>
+			<div class = "row">
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body" id = "app5">
+							<ol>
+								<todo-item v-for="item in list" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type = "text/javascript">
+			var app1 = new Vue({
+				el:"#app1",
+				data:{
+					message:'悬停测试',
+					tip:'页面加载于 ' + new Date().toLocaleString(),
+					seen:true
+				}
+			})
+			var app2 = new Vue({
+				el:"#app2",
+				data:{
+					todos:[
+						{text:'Study JavaScript'},
+						{text:'Study Java'},
+						{text:'Study Python'},
+						{text:'Study CSS'},
+					],
+					options:[
+						{v:0,t:"A"},  
+						{v:1,t:"B"},  
+						{v:2,t:"C"},  
+						{v:3,t:"D"},  
+						{v:4,t:"E"}    
+					]
+				}
+			})
+			var app3 = new Vue({
+				el:"#app3",
+				data:{
+					message:"Hello Vue.js!"
+				},
+				methods:{
+					reverse:function(){
+						this.message = this.message.split('').reverse().join('');
+					}
+				}
+			})
+			var app4 = new Vue({
+				el:"#app4",
+				data:{
+					message:"Input Value"
+				}
+			})
+			Vue.component(
+				'todo-item',{
+					props:['todo'],
+					template:'<li>{{todo.text}}</li>'
+				}	
+			)
+			var app5 = new Vue({
+				el:"#app5",
+				data:{
+					list:[
+						{id:0,text:'A'},
+						{id:1,text:'B'},
+						{id:2,text:'C'},
+						{id:3,text:'D'}
+					]
+				}
+			})			
+			function hide(){
+				app1.seen = false; 
+			}
+			function add(){
+				app2.todos.push({text:'Study More'});
+			}
+		</script>
+	</body>
+</html>
