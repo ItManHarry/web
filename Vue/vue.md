@@ -95,4 +95,4 @@
 
 - 生命周期图示
 
-![生命周期](https://github.com/ItManHarry/Java/blob/master/J2EEDevelopeShare/SHARING.jpg)
+![生命周期](https://github.com/ItManHarry/web/blob/master/Vue/lifecycle.png)
