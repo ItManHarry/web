@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Vue Index</title>
+		<link rel = "stylesheet" href = "../css/bootstrap.min.css" media="screen"/>
+		<script type = "text/javascript" src = "../js/jquery-1.11.3.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "../js/popper.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "../js/bootstrap.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "../js/vue.js" charset="UTF-8"></script>
+	</head>
+	<body>
+		<div class = "container" id = "vm"><br>
+			<div class = "row">
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">插值 - 文本</h4>
+							<p>Message 1:{{message1}}</p>
+							<!-- 通过使用 v-once 指令，你也能执行一次性地插值，当数据改变时，插值处的内容不会更新。但请留心这会影响到该节点上的其它数据绑定 -->
+							<p v-once>Message 2:{{message2}}</p>							
+							<!--button v-on:click = "doFreeze" type = "button" class = "btn btn-primary">Freeze</button-->
+							<button v-on:click = "doChange" type = "button" class = "btn btn-primary">Change</button>
+						</div>
+					</div>
+				</div>	
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">插值 - 原始HTML</h4>
+							<!-- 双大括号会将数据解释为普通文本，而非 HTML 代码。为了输出真正的 HTML，你需要使用 v-html 指令 -->
+							<p>Using mustaches:{{rawHtml}}</p>
+							<p>Using v-html directive:<span v-html = "rawHtml"></span></p>
+							<!-- Mustache 语法不能作用在 HTML 特性上，遇到这种情况应该使用 v-bind 指令 -->	
+							<button v-bind:disabled="isDisabled" v-on:click = "doBindAction" type = "button" class = "btn btn-primary">Bind</button>				
+						</div>
+					</div>
+				</div>				
+			</div>
+			<div class = "row">
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">使用 JavaScript 表达式</h4>
+							<p>(Number + 1) is : {{number + 1}}</p>
+							<p>Is OK : {{ok ? 'Yes' : 'No'}}</p>
+							<p>{{message.split('').reverse().join('')}}</p>
+						</div>
+					</div>
+				</div>	
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">指令</h4>
+							<!--这里，v-if 指令将根据表达式 seen 的值的真假来插入/移除p 元素。-->
+							<p v-if="seen">现在你看到我了</p>
+							<!-- Mustache 语法不能作用在 HTML 特性上，遇到这种情况应该使用 v-bind 指令 -->	
+							<button v-on:click = "doHideAction" type = "button" class = "btn btn-primary">Hide</button>
+							<button v-on:click = "doShowAction" type = "button" class = "btn btn-primary">Show</button>			
+						</div>
+					</div>
+				</div>				
+			</div>
+		</div>
+		<script type = "text/javascript">
+			var data = {
+				message1:"",
+				message2:"This messge won't be changed at all because of 'v-once' property.",
+				rawHtml:"<span style = 'color:red'>This should be red.</span>",
+				isDisabled:false,
+				number:2,
+				ok:true,
+				message:"I am Harry",
+				seen:true
+			};			
+			//Object.freeze(data); //冻结数据
+			new Vue({
+				el:"#vm",
+				data:data,
+				methods:{
+					doFreeze:function(){
+						Object.freeze(data);
+					},
+					doChange:function(){
+						alert("Do change now...");
+						this.message1 = "Changes happened.";
+						this.message2 = "Changes won't happen.";
+					},
+					doBindAction:function(){
+						alert("Do the bind action.");
+					},
+					doHideAction:function(){
+						this.seen = false;
+					},
+					doShowAction:function(){
+						this.seen = true;
+					}
+				},
+				created:function(){
+					alert("The vm has been created, now give the message a new value");
+					this.message1 = "The message is : A new Vue instance is created...";
+				}
+			})
+		</script>
+	</body>
+</html>
