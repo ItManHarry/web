@@ -57,7 +57,7 @@
 							<p v-if="seen">现在你看到我了</p>
 							<!-- Mustache 语法不能作用在 HTML 特性上，遇到这种情况应该使用 v-bind 指令 -->	
 							<button v-on:click = "doHideAction" type = "button" class = "btn btn-primary">Hide</button>
-							<button v-on:click = "doShowAction" type = "button" class = "btn btn-primary">Show</button>			
+							<button v-on:click = "doShowAction" type = "button" v-bind:class = "css">Show</button>			
 						</div>
 					</div>
 				</div>				
@@ -72,7 +72,8 @@
 				number:2,
 				ok:true,
 				message:"I am Harry",
-				seen:true
+				seen:true,
+				css:"btn btn-primary"
 			};			
 			//Object.freeze(data); //冻结数据
 			new Vue({
