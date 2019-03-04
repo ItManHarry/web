@@ -190,3 +190,67 @@
 ```
 	<a v-on:click="doSomething">...</a>	
 ```
+
+- 动态参数
+
+	从 2.6.0 开始，可以用方括号括起来的 JavaScript 表达式作为一个指令的参数：
+	
+```
+	<a v-bind:[attributeName]="url"> ... </a>
+```
+	
+	这里的 attributeName 会被作为一个 JavaScript 表达式进行动态求值，求得的值将会作为最终的参数来使用。例如，如果你的 Vue 实例有一个 data 属性 attributeName，其值为 "href"，那么这个绑定将等价于 v-bind:href。
+
+	同样地，你可以使用动态参数为一个动态的事件名绑定处理函数：
+
+```
+	<a v-on:[eventName]="doSomething"> ... </a>	
+```
+
+	同样地，当 eventName 的值为 "focus" 时，v-on:[eventName] 将等价于 v-on:focus。
+	
+	对动态参数的值的约束
+	动态参数预期会求出一个字符串，异常情况下值为 null。这个特殊的 null 值可以被显性地用于移除绑定。任何其它非字符串类型的值都将会触发一个警告。
+
+	对动态参数表达式的约束
+	
+	动态参数表达式有一些语法约束，因为某些字符，例如空格和引号，放在 HTML 特性名里是无效的。
+	
+	例如，下面的代码是无效的：
+	
+```
+	<!-- 这会触发一个编译警告 -->
+	<a v-bind:['foo' + bar]="value"> ... </a>
+```
+
+- 修饰符
+
+	修饰符 (modifier) 是以半角句号 . 指明的特殊后缀，用于指出一个指令应该以特殊方式绑定。例如，.prevent 修饰符告诉 v-on 指令对于触发的事件调用 event.preventDefault()：
+	
+```
+	<form v-on:submit.prevent="onSubmit">...</form>
+```
+
+- 缩写
+
+	v- 前缀作为一种视觉提示，用来识别模板中 Vue 特定的特性。当你在使用 Vue.js 为现有标签添加动态行为 (dynamic behavior) 时，v- 前缀很有帮助，然而，对于一些频繁用到的指令来说，就会感到使用繁琐。同时，在构建由 Vue 管理所有模板的单页面应用程序 (SPA - single page application) 时，v- 前缀也变得没那么重要了。因此，Vue 为 v-bind 和 v-on 这两个最常用的指令，提供了特定简写：
+	
+	- v-bind 缩写
+	
+```
+	<!-- 完整语法 -->
+	<a v-bind:href="url">...</a>
+
+	<!-- 缩写 -->
+	<a :href="url">...</a>
+```
+
+	- v-on缩写
+	
+```
+	<!-- 完整语法 -->
+	<a v-on:click="doSomething">...</a>
+
+	<!-- 缩写 -->
+	<a @click="doSomething">...</a>
+```
