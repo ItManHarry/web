@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Vue Demo02</title>
+		<link rel = "stylesheet" href = "../css/bootstrap.min.css" media="screen"/>
+		<link rel = "stylesheet" href = "../css/font-awesome.min.css" media="screen"/>
+		<script type = "text/javascript" src = "../js/jquery-1.11.3.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "../js/popper.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "../js/bootstrap.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "../js/vue.js" charset="UTF-8"></script>
+	</head>
+	<body>
+		<div class = "container" id = "vm"><br>
+			<div class = "row">
+				<div class = "col-12">
+					<h3>Class绑定</h3>
+				</div>
+			</div><br>
+			<div class = "row">
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">对象语法</h4>
+							<p class = "text-left" :class = "{'text-danger':isDanger}">普通绑定:Is this a dangerous text?</p>
+							<p class = "text-left" :class = "classObj">计算属性绑定:Is this a dangerous text?</p>
+							<button :class = "btnDanger" @click = "yesAction">Yes</button>&nbsp;&nbsp;
+							<button :class = "btnSucc" @click = "noAction">No</button>
+						</div>
+					</div>
+				</div>	
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">数组语法</h4>
+							<p :class = "[txtLeft, txtSuccess]">普通绑定:Is this a success text?</p>
+							<p :class = "[txtLeft, {'text-success':isSuccess}]">对象绑定:Is this a success text?</p>
+							<myComponent></myComponent>
+							<button :class = "btnSucc" @click = "isSuccessAction">Yes</button>&nbsp;&nbsp;
+							<button :class = "btnDanger" @click = "notSuccessAction">No</button>
+							
+						</div>
+					</div>
+				</div>				
+			</div><br>
+			<div class = "row">
+				<div class = "col-12">
+					<h3>Style 绑定</h3>
+				</div>
+			</div><br>
+			<div class = "row">
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">对象语法</h4>
+							<p class = "text-left" :style = "{color:activeColor, fontSize:fontSize+'px'}">普通绑定:Is this a dangerous text?</p>
+							<p class = "text-left" :style = "styleObj">对象绑定:Is this a dangerous text?</p>
+						</div>
+					</div>
+				</div>	
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">数组语法</h4>
+							<p :style = "[{'color': activeColor}, {'fontSize':fontSize+'px'}]">数组绑定:Is this a success text?</p>	
+						</div>
+					</div>
+				</div>				
+			</div>
+			<div class = "row">
+				<div class = "col-12">
+					<div class = "card">
+						<div class = "card-body text-right">
+							<button class = "btn btn-success" @click = "greenAction">G</button>&nbsp;&nbsp;
+							<button class = "btn btn-danger" @click = "redAction">R</button>&nbsp;&nbsp;
+							<button class = "btn btn-default" @click = "bigAction"><i class = "fa fa-plus"></i></button>&nbsp;&nbsp;
+							<button class = "btn btn-default" @click = "smallAction"><i class = "fa fa-minus"></i></button>
+						</div>
+					</div>				
+				</div>
+			</div>
+		</div>
+		<script type = "text/javascript">
+			var data = {
+				isDanger:false,
+				btnDanger:"btn btn-danger",
+				btnSucc:"btn btn-success",
+				txtLeft:"text-left",
+				txtSuccess:"text-success",
+				isSuccess:false,
+				activeColor:'green',
+				fontSize:30,
+				styleObj:{
+					color:"green",
+					fontSize:'24px'
+				}
+			};			
+			new Vue({
+				el:"#vm",
+				data:data,
+				methods:{
+					yesAction:function(){
+						this.isDanger = true
+					},
+					noAction:function(){
+						this.isDanger = false
+					},
+					isSuccessAction:function(){						
+						this.isSuccess = true
+					},
+					notSuccessAction:function(){						
+						this.isSuccess = false
+					},
+					greenAction:function(){
+						this.activeColor = 'green'
+						this.styleObj.color = 'green'
+					},
+					redAction:function(){
+						this.activeColor = 'red'
+						this.styleObj.color = 'red'
+					},
+					bigAction:function(){
+						this.fontSize++
+					},
+					smallAction:function(){
+						this.fontSize--
+					}
+				},
+				computed:{
+					classObj:function(){
+						return {
+							'text-danger':this.isDanger
+						}
+					}
+				}
+			})
+			Vue.component('myComponent', {
+			  template: '<div class="text-primary">Hi</div>'
+			})
+		</script>
+	</body>
+</html>
