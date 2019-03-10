@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Vue Demo03</title>
+		<link rel = "stylesheet" href = "../css/bootstrap.min.css" media="screen"/>
+		<link rel = "stylesheet" href = "../css/font-awesome.min.css" media="screen"/>
+		<script type = "text/javascript" src = "../js/jquery-1.11.3.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "../js/popper.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "../js/bootstrap.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "../js/vue.js" charset="UTF-8"></script>
+	</head>
+	<body>
+		<div class = "container" id = "vm"><br>			
+			<div class = "row">
+				<div class = "col-12">
+					<h3>条件渲染</h3>
+				</div>
+			</div><br>
+			<div class = "row">
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">v-if & v-else-if & v-else</h4>
+							<p v-if = "seen" class = "text-left text-primary">Now you can see me, because the seen is ture.</p>
+							<p v-else class = "text-left text-danger">Now you can see me, because the seen is false.</p>
+							<button :class = "btnSucc" @click = "doShow">Show</button>&nbsp;&nbsp;
+							<button :class = "btnDanger" @click = "doHide">Hide</button>
+							<div v-if = "number > 0.5">
+								<br><p class = "text-left text-primary">{{number}}</p>
+							</div>
+							<div v-else>
+								<br><p class = "text-left text-danger">{{number}}</p>
+							</div>
+							<button class = "btn btn-primary" @click = "changeNumber">Random</button>
+							<div v-if = "letter == 'A'">
+								<br><p class = "text-left text-danger">This is letter : {{letter}}</p>
+							</div>
+							<div v-else-if = "letter == 'B'">
+								<br><p class = "text-left text-primary">This is letter : {{letter}}</p>
+							</div>
+							<div v-else-if = "letter == 'C'">
+								<br><p class = "text-left text-success">This is letter : {{letter}}</p>
+							</div>
+							<div v-else>
+								<br><p class = "text-left text-warning">This is letter : {{letter}}</p>
+							</div>
+							<button class = "btn btn-danger"  @click = "changeCharacter('A')">A</button>
+							<button class = "btn btn-primary" @click = "changeCharacter('B')">B</button>
+							<button class = "btn btn-success" @click = "changeCharacter('C')">C</button>
+							<button class = "btn btn-warning" @click = "changeCharacter('D')">D</button>
+						</div>
+					</div>
+				</div>	
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">数组语法</h4>
+							
+						</div>
+					</div>
+				</div>				
+			</div>
+		</div>
+		<script type = "text/javascript">
+			var data = {
+				btnDanger:"btn btn-danger",
+				btnSucc:"btn btn-success",
+				seen:true,
+				number:Math.random(),
+				letter:"A"
+			};			
+			new Vue({
+				el:"#vm",
+				data:data,
+				methods:{					
+					doShow:function(){
+						this.seen = true
+					},
+					doHide:function(){
+						this.seen = false
+					},
+					changeNumber:function(){
+						this.number = Math.random()
+					},
+					changeCharacter:function(p){
+						this.letter = p
+					}
+				},
+				computed:{
+					
+				}
+			})
+		</script>
+	</body>
+</html>
