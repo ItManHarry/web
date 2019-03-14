@@ -57,7 +57,11 @@
 					<div class = "card">
 						<div class = "card-body">
 							<h4 class = "card-title">数组语法</h4>
-							
+							<select class = "form-control" @change = "changeSelected('op')" name = "op" id = "op">
+								<option value = "0">A</option>
+								<option value = "1">B</option>
+								<option value = "2">C</option>
+							</select>
 						</div>
 					</div>
 				</div>				
@@ -86,6 +90,9 @@
 					},
 					changeCharacter:function(p){
 						this.letter = p
+					},
+					changeSelected:function(e){
+						alert("Selected option has been changed." + $("#"+e).val());
 					}
 				},
 				computed:{
