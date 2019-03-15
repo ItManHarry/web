@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Vue Demo04</title>
+		<link rel = "stylesheet" href = "../css/bootstrap.min.css" media="screen"/>
+		<link rel = "stylesheet" href = "../css/font-awesome.min.css" media="screen"/>
+		<script type = "text/javascript" src = "../js/jquery-1.11.3.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "../js/popper.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "../js/bootstrap.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "../js/vue.js" charset="UTF-8"></script>
+	</head>
+	<body>
+		<div class = "container" id = "vm"><br>			
+			<div class = "row">
+				<div class = "col-12">
+					<h3>列表渲染</h3>
+				</div>
+			</div><br>
+			<div class = "row">
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">v-for[迭代数组 - 数据元素为对象]</h4>
+							<ul>
+								<!-- 也可以用 of 替代 in 作为分隔符 -->
+								<li v-for = "(item, index) in items">
+									{{parentMessage}} - {{index}} - {{item.message}}
+								</li>
+							</ul>
+							<button :class = "primaryBtn" @click = "doAdd"><i class = "fa fa-plus"></i></button>&nbsp;&nbsp;
+							<button :class = "warningBtn" @click = "doMin"><i class = "fa fa-minus"></i></button>
+							<br><br><h4 class = "card-title">v-for[迭代数组 - 数据元素为普通数据]</h4>
+							<ul>
+								<li v-for = "(v, i) of arrays">
+									{{i}} - {{v}}
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>	
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">v-for[迭代对象]</h4>
+							<ul>
+								<!-- 第一个是数值，第二个是key，第三个是索引 -->
+								<li v-for = "(v, k, i) in e">
+									{{i}} - {{k}} : {{v}}
+								</li>
+							</ul>							
+						</div>
+					</div>
+				</div>				
+			</div>
+			<br>
+			<div class = "row">				
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">数组语法</h4>
+							<select class = "form-control" @change = "changeSelected('op')" name = "op" id = "op">
+								<option value = "0">A</option>
+								<option value = "1">B</option>
+								<option value = "2">C</option>
+							</select>
+						</div>
+					</div>
+				</div>	
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">Other</h4>							
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>
+		<script type = "text/javascript">
+			var data = {
+				parentMessage:"Parent",
+				items:[
+					{message:"Foo"},
+					{message:"Bar"},
+					{message:"Top"},
+					{message:"Tool"}
+				],
+				primaryBtn:"btn btn-primary",
+				warningBtn:"btn btn-warning",
+				e:{
+					FirstName:"Harry",
+					LastName:"Cheng",
+					Age: 36
+				},
+				arrays:['A','B','C','D']
+			};			
+			new Vue({
+				el:"#vm",
+				data:data,
+				methods:{
+					changeSelected:function(e){
+						alert("Selected option has been changed." + $("#"+e).val());
+					},
+					doAdd:function(){
+						this.items.push({message:"Nav"})
+					},
+					doMin:function(){
+						this.items.pop()
+					}
+				},
+				computed:{
+					
+				}
+			})
+		</script>
+	</body>
+</html>
