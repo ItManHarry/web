@@ -71,7 +71,16 @@
 				<div class = "col-6">
 					<div class = "card">
 						<div class = "card-body">
-							<h4 class = "card-title">Other</h4>							
+							<h4 class = "card-title">一个组件的 v-for</h4>
+							<ul>
+								<li
+								  is="todo-item"
+								  v-for="(todo, index) in todos"
+								  v-bind:key="todo.id"
+								  v-bind:title="todo.title"
+								  v-on:remove="todos.splice(index, 1)"
+								></li>
+							  </ul>
 						</div>
 					</div>
 				</div>	
@@ -93,7 +102,19 @@
 					LastName:"Cheng",
 					Age: 36
 				},
-				arrays:['A','B','C','D']
+				arrays:['A','B','C','D'],
+				newTodoText:'',
+				todos:[{
+					id:1,
+					title:'Do the dishes'
+				},{
+					id:2,
+					title:'Take out the trash'
+				},{
+					id:3,
+					title:'Mow the lawn'
+				}],
+				nextTodoId:4
 			};			
 			new Vue({
 				el:"#vm",
@@ -113,6 +134,17 @@
 					
 				}
 			})
+			//自定义组件
+			Vue.component('todo-item', {
+				template:'\
+					<li>\
+						{{title}}\
+						<button @click="$emit(\'remove\')">Remove</button>\
+					<li>\
+				',
+				props:['title']
+			})
+			
 		</script>
 	</body>
 </html>
