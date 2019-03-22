@@ -12,69 +12,66 @@
 		<script type = "text/javascript" src = "../js/vue.js" charset="UTF-8"></script>
 	</head>
 	<body>
-		<div class = "container" id="todo-list-example">
-			<br>
-		  <form @submit.prevent="addNewTodo">
+		<div class = "container" id="vm"><br>			
 			<div class = "row">
-				<div class = "col-2 text-center"><label for="new-todo">Add a todo</label></div>
-				<div class = "col-4">
-					<input @keyup = "addTodoItem" v-model="newTodoText" id="new-todo" placeholder="E.g. Feed the cat" class = "form-control"/>
+				<div class = "col-12">
+					<h3>监听事件</h3>
 				</div>
-				<div class = "col-2"><button class = "btn btn-primary">Add</button></div>
-			</div>			
-		  </form>
-		  <ul>
-			<li
-			  is="todo-item"
-			  v-for="(todo, index) in todos"
-			  v-bind:key="todo.id"
-			  v-bind:title="todo.title"
-			  v-on:remove="todos.splice(index, 1)"
-			></li>
-		  </ul>
+			</div><br>
+			<div class = "row">
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">使用v-on监听DOM事件,处理简单的js事件</h4>
+							<button class = "btn btn-primary" v-on:click = "counter += 1">ADD 1</button>
+							<p>The button has been clicked {{counter}} times.</p>
+						</div>
+					</div>
+				</div>	
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">事件处理方法，编写具体的function</h4>
+							<button class = "btn btn-primary" v-on:click = "greet">Greet</button>							
+						</div>
+					</div>
+				</div>				
+			</div><br>
+			<div class = "row">
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">内联处理器中的方法s</h4>
+							<button class = "btn btn-primary" v-on:click = "say('hi')">Say hi</button>
+							<button class = "btn btn-primary" v-on:click = "say('What')">Say What</button>
+						</div>
+					</div>
+				</div>	
+				<div class = "col-6">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">事件修饰符</h4>
+											
+						</div>
+					</div>
+				</div>				
+			</div>
 		</div>
-		<script type = "text/javascript">
-			Vue.component('todo-item', {
-			  template: '\
-				<li>\
-				  {{ title }}\
-				  <button class = "btn btn-link" @click="$emit(\'remove\')">Remove</button>\
-				</li>\
-			  ',
-			  props: ['title']
-			})
-
+		<script type = "text/javascript">			
 			new Vue({
-			  el: '#todo-list-example',
+			  el: '#vm',
 			  data: {
-				newTodoText: '',
-				todos: [
-				  {
-					id: 1,
-					title: 'Do the dishes',
-				  },
-				  {
-					id: 2,
-					title: 'Take out the trash',
-				  },
-				  {
-					id: 3,
-					title: 'Mow the lawn'
-				  }
-				],
-				nextTodoId: 4
+				counter:0,
+				name:'Vue.js'
 			  },
 			  methods: {
-				addNewTodo: function () {
-				  this.todos.push({
-					id: this.nextTodoId++,
-					title: this.newTodoText
-				  })
-				  this.newTodoText = ''
+				greet:function(event){
+					alert('' + this.name + '!')
+					if(event)
+						alert(event.target.tagName)
 				},
-				addTodoItem:function(e){
-					if(e.keyCode == 13)
-						addNewTodo()
+				say:function(message){
+					alert(message)
 				}
 			  }
 			})
