@@ -72,13 +72,21 @@
 					<div class = "card">
 						<div class = "card-body">
 							<h4 class = "card-title">一个组件的 v-for</h4>
+							<form @submit.prevent="addNewTodo">
+								<div class = "row">									
+									<div class = "col-6">
+										<input @keyup = "addTodoItem" v-model="newTodoText" id="new-todo" placeholder="E.g. Feed the cat" class = "form-control"/>
+									</div>
+									<div class = "col-2"><button class = "btn btn-primary">Add</button></div>
+								</div>			
+							</form>
 							<ul>
 								<li
 								  is="todo-item"
 								  v-for="(todo, index) in todos"
-								  v-bind:key="todo.id"
-								  v-bind:title="todo.title"
-								  v-on:remove="todos.splice(index, 1)"
+								  :key="todo.id"
+								  :title="todo.title"
+								  @remove="todos.splice(index, 1)"
 								></li>
 							  </ul>
 						</div>
@@ -87,6 +95,16 @@
 			</div>
 		</div>
 		<script type = "text/javascript">
+			//自定义组件
+			Vue.component('todo-item', {
+				template:'\
+					<li>\
+						{{title}}\
+						<button class = "btn btn-link" @click="$emit(\'remove\')">Remove</button>\
+					<li>\
+				',
+				props:['title']
+			})
 			var data = {
 				parentMessage:"Parent",
 				items:[
@@ -128,23 +146,23 @@
 					},
 					doMin:function(){
 						this.items.pop()
+					},
+					addNewTodo: function () {
+					  this.todos.push({
+						id: this.nextTodoId++,
+						title: this.newTodoText
+					  })
+					  this.newTodoText = ''
+					},
+					addTodoItem:function(e){
+						if(e.keyCode == 13)
+							addNewTodo()
 					}
 				},
 				computed:{
 					
 				}
-			})
-			//自定义组件
-			Vue.component('todo-item', {
-				template:'\
-					<li>\
-						{{title}}\
-						<button @click="$emit(\'remove\')">Remove</button>\
-					<li>\
-				',
-				props:['title']
-			})
-			
+			})			
 		</script>
 	</body>
 </html>
