@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Vue Demo06</title>
+		<link rel = "stylesheet" href = "../css/bootstrap.min.css" media="screen"/>
+		<link rel = "stylesheet" href = "../css/font-awesome.min.css" media="screen"/>
+		<script type = "text/javascript" src = "../js/jquery-1.11.3.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "../js/popper.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "../js/bootstrap.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "../js/vue.js" charset="UTF-8"></script>
+	</head>
+	<body>
+		<div class = "container" id="vm"><br>			
+			<div class = "row">
+				<div class = "col-12">
+					<h3>表单输入绑定事件</h3>
+				</div>
+			</div><br>
+			<div class = "row">
+				<div class = "col-12">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">文本</h4>
+							<input type = "text" placeholder = "Input text" class = "form-control" v-model = "inputTxt"/>
+							<p>Single text is : {{inputTxt}}</p>
+							<h4>多行文本</h4>
+							<textarea v-model = "inputTxtArea" class = "form-control" placeholder = "Input multicol text..."></textarea>
+							<p>Multiline text is : {{inputTxtArea}}</p>
+							<h4>复选框</h4>
+							<input type = "checkbox" id = "ck" class = "form-control" v-model = "checked"/>
+							<label for = "ck">{{checked}}</label><br>
+							<input type = "checkbox" id = "ck1" class = "form-control" value = "Harry" v-model = "cks"/>
+							<label for = "ck1">Harry</label>
+							<input type = "checkbox" id = "ck2" class = "form-control" value = "Jack" v-model = "cks"/>
+							<label for = "ck2">Jack</label>
+							<input type = "checkbox" id = "ck3" class = "form-control" value = "Jone" v-model = "cks"/>
+							<label for = "ck3">Jone</label>
+							<p>Selected names : {{cks.join()}}</p>
+							<h4>单选按钮</h4>
+							<input type = "radio" id = "one" value = "One" class = "form-control" v-model = "rd"/>
+							<label for = "one">One</label>
+							<input type = "radio" id = "two" value = "Two" class = "form-control" v-model = "rd"/>
+							<label for = "two">Two</label>
+							<p>Selected : {{rd}}</p>
+							<h4>选择框</h4>
+							<select id = "ss" class = "form-control" v-model = "singleSlt">
+								<option value = "0">A</option>
+								<option value = "1">B</option>
+								<option value = "2">C</option>
+							</select>
+							<p>Selected : {{singleSlt}}</p>
+						</div>
+					</div>
+				</div>							
+			</div>
+		</div>
+		<script type = "text/javascript">			
+			new Vue({
+			  el: '#vm',
+			  data: {
+				inputTxt:"",
+				inputTxtArea:"",
+				checked:true,
+				cks:[],
+				rd:"",
+				singleSlt:""
+			  },
+			  methods: {
+				
+			  }
+			})
+		</script>
+	</body>
+</html>
