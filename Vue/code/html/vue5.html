@@ -50,8 +50,9 @@
 				<div class = "col-6">
 					<div class = "card">
 						<div class = "card-body">
-							<h4 class = "card-title">事件修饰符</h4>
-											
+							<h4 class = "card-title">按键修饰符</h4>
+							<input type = "text" class = "form-control" v-model = "inputName" v-on:keyup.13 = "finishInput" placeholder = "Input your name..."/>
+							<h3>My name is : {{inputName}}</h3>
 						</div>
 					</div>
 				</div>				
@@ -62,7 +63,8 @@
 			  el: '#vm',
 			  data: {
 				counter:0,
-				name:'Vue.js'
+				name:'Vue.js',
+				inputName:""
 			  },
 			  methods: {
 				greet:function(event){
@@ -72,6 +74,9 @@
 				},
 				say:function(message){
 					alert(message)
+				},
+				finishInput:function(){
+					alert("My name is : " + inputName)
 				}
 			  }
 			})
