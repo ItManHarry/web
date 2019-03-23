@@ -42,8 +42,8 @@
 					<div class = "card">
 						<div class = "card-body">
 							<h4 class = "card-title">内联处理器中的方法s</h4>
-							<button class = "btn btn-primary" v-on:click = "say('hi')">Say hi</button>
-							<button class = "btn btn-primary" v-on:click = "say('What')">Say What</button>
+							<button class = "btn btn-primary" v-on:click = "say('hi', $event)">Say hi</button>
+							<button class = "btn btn-primary" v-on:click = "say('What'), $event">Say What</button>
 						</div>
 					</div>
 				</div>	
