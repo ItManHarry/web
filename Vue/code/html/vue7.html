@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Vue Demo07</title>
+		<link rel = "stylesheet" href = "../css/bootstrap.min.css" media="screen"/>
+		<link rel = "stylesheet" href = "../css/font-awesome.min.css" media="screen"/>
+		<script type = "text/javascript" src = "../js/jquery-1.11.3.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "../js/popper.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "../js/bootstrap.min.js" charset="UTF-8"></script>
+		<script type = "text/javascript" src = "../js/vue.js" charset="UTF-8"></script>
+	</head>
+	<body>
+		<div class = "container" id="vm"><br>			
+			<div class = "row">
+				<div class = "col-12">
+					<h3>组件基础</h3>
+				</div>
+			</div><br>
+			<div class = "row">
+				<div class = "col-12">
+					<div class = "card">
+						<div class = "card-body">
+							<h4 class = "card-title">基本示例</h4>
+							<button-counter></button-counter>
+							<button-counter></button-counter>
+							<button-counter></button-counter>
+							<button-counter></button-counter>
+							<hr>
+							<h4 class = "card-title">通过 Prop 向子组件传递数据</h4>
+							<blog-post title = 'The begining of Vue'></blog-post>
+							<blog-post title = 'The Strong heart of mine'></blog-post>
+							<blog-post title = 'What can I give to you, my son.'></blog-post>
+							<hr>
+							<blog-post v-for = "post in posts" :key = "post.id" :title = "post.title"></blog-post>
+							<hr>
+							<blog-content :blog = "blog"></blog-content>
+						</div>
+					</div>
+				</div>							
+			</div>
+		</div>
+		<script type = "text/javascript">			
+			Vue.component('button-counter',{
+				data:function(){
+					return {
+						count: 0
+					}
+				},
+				template:'<button class = "btn btn-primary" @click = "count++">You clicked me {{count}} times.</button>'
+			})
+			Vue.component('blog-post',{
+				props:['title'],
+				template:'<h6>{{title}}</h6>'
+			})
+			Vue.component('blog-content',{
+				props:['blog'],
+				template:'<div><h6>{{blog.title}}</h6><div v-html = "blog.content"></div></div>'
+			})
+			new Vue({
+				el:"#vm",
+				data:{
+					posts:[
+						{id:1, title:"One"},
+						{id:2, title:"Two"},
+						{id:3, title:"Three"},
+						{id:4, title:"Four"}
+					],
+					blog:{
+						title:"This is a blog",
+						content:"<h4>I am doing the test of the Vue component.</h4>"
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
