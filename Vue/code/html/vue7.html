@@ -36,10 +36,14 @@
 							<blog-post v-for = "post in posts" :key = "post.id" :title = "post.title"></blog-post>
 							<hr>
 							<blog-content :blog = "blog"></blog-content>
+							<hr>							
 						</div>
 					</div>
 				</div>							
-			</div>
+			</div>			
+		</div>
+		<div :style = "{fontSize:blogFontSize + 'em'}" v-on:enlargeText = "blogFontSize+=0.1" id = "pvm">
+			<blog-button :blog = "blogButton"></blog-button>
 		</div>
 		<script type = "text/javascript">			
 			Vue.component('button-counter',{
@@ -58,6 +62,10 @@
 				props:['blog'],
 				template:'<div><h6>{{blog.title}}</h6><div v-html = "blog.content"></div></div>'
 			})
+			Vue.component('blog-button',{
+				props:['blog'],
+				template:'<div><h6>{{blog.title}}</h6><button class = "btn btn-primary" @click = "$emit(\'enlargeText\')">Enlarge the text font size</button><div v-html = "blog.content"></div></div>'
+			})
 			new Vue({
 				el:"#vm",
 				data:{
@@ -69,7 +77,17 @@
 					],
 					blog:{
 						title:"This is a blog",
-						content:"<h4>I am doing the test of the Vue component.</h4>"
+						content:"<h5>I am doing the test of the Vue component.</h5>"
+					}
+				}
+			})
+			new Vue({
+				el:"#pvm",
+				data:{
+					blogFontSize:1,
+					blogButton:{
+						title:"This is a blog button test",
+						content:"I am doing the test of the Vue component of action listener."
 					}
 				}
 			})
