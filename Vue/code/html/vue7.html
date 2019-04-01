@@ -35,16 +35,22 @@
 							<hr>
 							<blog-post v-for = "post in posts" :key = "post.id" :title = "post.title"></blog-post>
 							<hr>
+							<h4 class = "card-title">单个根元素</h4>
 							<blog-content :blog = "blog"></blog-content>
-							<hr>							
+							<hr>
+							<h4 class = "card-title">监听子组件事件&使用事件抛出一个值</h4>							
+							<div :style = "{fontSize:postFontSize + 'em'}">
+								<blog-button @enlarge-text = "enlargeText" :blog = "blogButton"></blog-button>
+							</div>	
+							<hr>
+							<h4 class = "card-title">在组件上使用 v-model</h4>	
+							<custom-input v-model = "searchText"></custom-input>
+							<p>Input value is : {{searchText}}</p>
 						</div>
 					</div>
 				</div>							
 			</div>			
-		</div>
-		<div :style = "{fontSize:blogFontSize + 'em'}" v-on:enlargeText = "blogFontSize+=0.1" id = "pvm">
-			<blog-button :blog = "blogButton"></blog-button>
-		</div>
+		</div>		
 		<script type = "text/javascript">			
 			Vue.component('button-counter',{
 				data:function(){
@@ -64,7 +70,11 @@
 			})
 			Vue.component('blog-button',{
 				props:['blog'],
-				template:'<div><h6>{{blog.title}}</h6><button class = "btn btn-primary" @click = "$emit(\'enlargeText\')">Enlarge the text font size</button><div v-html = "blog.content"></div></div>'
+				template:'<div><h6>{{blog.title}}</h6><button class = "btn btn-primary" @click = "$emit(\'enlarge-text\', 0.5)">Enlarge the text font size</button><div v-html = "blog.content"></div></div>'
+			})
+			Vue.component('custom-input',{
+				props:['value'],
+				template:'<input class = "form-control" :value = "value" @input = "$emit(\'input\', $event.target.value)">'
 			})
 			new Vue({
 				el:"#vm",
@@ -78,19 +88,21 @@
 					blog:{
 						title:"This is a blog",
 						content:"<h5>I am doing the test of the Vue component.</h5>"
-					}
-				}
-			})
-			new Vue({
-				el:"#pvm",
-				data:{
-					blogFontSize:1,
+					},
+					postFontSize:1,
 					blogButton:{
 						title:"This is a blog button test",
 						content:"I am doing the test of the Vue component of action listener."
+					},
+					searchText:""
+				},
+				methods:{
+					enlargeText:function(amount){
+						alert('Enlarge amount is : ' + amount)
+						this.postFontSize += amount
 					}
 				}
-			})
+			})			
 		</script>
 	</body>
 </html>
