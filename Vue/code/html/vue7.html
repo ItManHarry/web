@@ -46,6 +46,8 @@
 							<h4 class = "card-title">在组件上使用 v-model</h4>	
 							<custom-input v-model = "searchText"></custom-input>
 							<p>Input value is : {{searchText}}</p>
+							<h4 class = "card-title">通过插槽分发内容</h4>	
+							<alert-box>Something bad happened.</alert-box>
 						</div>
 					</div>
 				</div>							
@@ -75,6 +77,9 @@
 			Vue.component('custom-input',{
 				props:['value'],
 				template:'<input class = "form-control" :value = "value" @input = "$emit(\'input\', $event.target.value)">'
+			})
+			Vue.component('alert-box',{
+				template:'<div class = "alert alert-danger"><strong>Error!</strong><slot></slot></div>'
 			})
 			new Vue({
 				el:"#vm",

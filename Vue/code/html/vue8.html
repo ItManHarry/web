@@ -15,38 +15,22 @@
 		<div class = "container" id="vm"><br>			
 			<div class = "row">
 				<div class = "col-12">
-					<h3>组件基础</h3>
+					<h3>深入了解组件</h3>
 				</div>
 			</div><br>
 			<div class = "row">
 				<div class = "col-12">
 					<div class = "card">
 						<div class = "card-body">
-							<h4 class = "card-title">基本示例</h4>
-							<div :style="{ fontSize: postFontSize + 'em' }">
-								<blog-post v-for="post in posts" v-bind:key="post.id" v-bind:post="post"  v-on:enlarge-text="postFontSize += 0.1"></blog-post>
-							 </div>				
+							<h4 class = "card-title">组件名</h4>
+							<p>在注册一个组件的时候，我们始终需要给它一个名字,该组件名就是 Vue.component 的第一个参数定义组件名的方式有两种：使用 kebab-case:Vue.component('my-component-name', { /* ... */ });使用 PascalCase:Vue.component('MyComponentName', { /* ... */ })</p>				
 						</div>
 					</div>
 				</div>							
 			</div>			
 		</div>		
 		<script type = "text/javascript">			
-			Vue.component('blog-post', {
-			  props: ['post'],
-			  template: '<div class="blog-post"><h3>{{ post.title }}</h3><button v-on:click="$emit(\'enlarge-text\')">Enlarge text</button><div v-html="post.content"></div></div>'
-			})
-			new Vue({
-			  el: '#vm',
-			  data: {
-				posts: [
-				  { id: 1, title: 'My journey with Vue' },
-				  { id: 2, title: 'Blogging with Vue' },
-				  { id: 3, title: 'Why Vue is so fun' }
-				],
-				postFontSize: 1
-			  }
-			})
+			
 		</script>
 	</body>
 </html>
