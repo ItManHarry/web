@@ -1,6 +1,6 @@
 <template>
   <div id = "app">
-        {{msg}}
+        {{msg}} 
         <hr>
         <EventDemo :name = "name" @change = "handleChangeEvent"></EventDemo>
         <hr>
@@ -34,7 +34,17 @@
             <hr>  
             <InputDemo v-model="inputText"></InputDemo>
             <h2>Input text is : {{inputText}}</h2>
-        </div>
+            <hr>
+            <PersonalInfo v-model="phoneInfo" :zip-code.sync="zipCode" />
+            phoneInfo ： {{ phoneInfo }}, and the zipCode ： {{ zipCode }}  
+            <hr>
+            <button @click = 'changeThisName'>change this.name</button>
+            <button @click = 'changeThisInfo'>change this.info</button>
+            <button @click = 'changeThisList'>change this.list</button>
+            <ProperAndData :name = 'name' :info = 'info' :list = 'list'/> 
+            <hr>
+            <Clock></Clock>
+        </div>          
     </div>  
 </template>
 
@@ -45,18 +55,32 @@ import EventDemo from './components/EventDemo.vue'
 import Props from './components/Props.vue'
 import Slot from './components/Slot.vue'
 import InputDemo from  './components/InputDemo.vue'
+import PersonalInfo from './components/PersonalInfo.vue'
+import ProperAndData from './components/ProperAndData'
+import Clock from './components/Clock.vue'
+let name = 'Jack'
 export default {
   name: 'app',
-  data:function(){     
+  data(){     
+      this.name = name
       return {
           msg:'Hello Vue, welcome you.',
           info:'',
           items:[],
-          name:"Harry",
+          name:"Harry2",
           type:"success",
           list:[1,2,3,4],
           isVisible:true,
-          inputText:''
+          inputText:'',
+          phoneInfo: {
+            areaCode: "+86",
+            phone: ""
+          },
+          zipCode: "",
+          info:{
+            number:0
+          },
+          list:[]
       }
   },
   methods:{
@@ -67,6 +91,18 @@ export default {
       handleChangeEvent(v){
         alert("Now the value v is : " + v)
         this.name = v
+      },
+      changeThisName(){
+        this.name = "Vue" + Date.now()
+        console.log('父组件的name属性已更新，但是没有触发子组件的更新')
+      },
+      changeThisInfo(){
+        this.info.number = 1
+        console.log('父组件的info属性已更新，但是没有触发子组件的更新')
+      },
+      changeThisList(){
+        this.list.push(1,2,3)
+        console.log('父组件的list属性已更新，但是没有触发子组件的更新')
       }
   },
   components: {
@@ -75,7 +111,10 @@ export default {
     EventDemo,
     Props,
     Slot,
-    InputDemo
+    InputDemo,
+    PersonalInfo,
+    ProperAndData,
+    Clock
   }
 }
 </script>
