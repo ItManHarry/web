@@ -438,3 +438,23 @@
 ```
 
 	在这个示例中，使用 watch 选项允许我们执行异步操作 (访问一个 API)，限制我们执行该操作的频率，并在我们得到最终结果前，设置中间状态。这些都是计算属性无法做到的。
+	
+# Vuex
+
+- 核心概念
+
+	- State : this.$store.state.xxx (mapState取值)
+	
+	- Getter : this.$store.getters.xxx mapGetter取值
+	
+	- Mutation : this.$store.commit("xxx") mapMutations赋值
+	
+	- Action : this.$store.dispatch("xxx") mapActions赋值
+	
+	- Module 
+		
+		1.开启命名空间 namespaced:true
+		
+		2.嵌套模块不要过深,尽量扁平化
+		
+		3.灵活应用createNamespacedHelpers
