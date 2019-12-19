@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Video&Audio</title>		
+		<link rel = "stylesheet" href = "css/bootstrap.min.css" media="screen"/>
+	</head>	
+<body>
+	<div class = "container" style = "margin-top:20px;">
+		<div class = "row">
+			<div class = "col-12">
+				<h3>Video</h3>
+					<video width="100%" height="400" controls="controls" id = "video">	  
+						<source src="./video/mov_bbb.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video><br>
+					<button id = "" onclick = "playPause(1);" class = "btn btn-outline-primary">Play/Pause</button>
+					<button id = "" onclick = "bigger(); " class = "btn btn-outline-info">Bigger</button>
+					<button id = "" onclick = "middle();" class = "btn btn-outline-success">Normal</button>
+					<button id = "" onclick = "smaller();" class = "btn btn-outline-warning">Smaller</button>
+			</div>
+		</div>
+		<div class = "row">
+			<div class = "col-12">
+				<h3>Audio</h3>
+				<audio  width = "100%"controls="controls" id = "audio">	  
+					<source src="./audio/unit1_lesson1.mp3" type="audio/mpeg">
+					Your browser does not support the audio tag.
+				</audio><br>
+				<button id = "" onclick = "playPause(2);" class = "btn btn-outline-primary">Play/Pause</button>				
+			</div>
+		</div>
+	</div>
+	<script>		
+		var video = document.getElementById("video");
+		var audio = document.getElementById("audio");
+		function playPause(type){
+			if(type == 1)
+				if(video.paused)
+					video.play();
+				else 
+					video.pause();
+			else
+				if(audio.paused)
+					audio.play();
+				else 
+					audio.pause();
+		}
+		function bigger(){
+			video.width = 700;			
+		}
+		function middle(){
+			video.width = 500;			
+		}
+		function smaller(type){
+			video.width = 300;
+		}
+	</script>
+</body>
+</html>
