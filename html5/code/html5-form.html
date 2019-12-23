@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Form</title>		
+		<link rel = "stylesheet" href = "css/bootstrap.min.css" media="screen"/>
+	</head>		
+<body>
+	<script>
+		
+	</script>
+	<div class = "container" style = "margin-top:20px;">		
+		<div class = "row">
+			<div class = "col-12">
+				<form id = "info-form">
+					<div class = "form-group">
+						<label for = "email">Email </label>
+						<input type = "email" class="form-control" id = "email" name = "email" placeholder = "Email ..." autofocus = "autofocus"/>
+						<small>We ' ll never share you email with the others!!!</small>
+					</div>
+					<div class = "form-group">
+						<label for = "passwd">Password  </label>
+						<input type = "password" class="form-control" name = "passwd"  id = "passwd"/>
+					</div>
+					<div class = "form-group">
+						<label for = "url">URL  </label>
+						<input type = "url" class="form-control"  id = "url" name = "url" list = "url_list"/>
+						<datalist id="url_list">
+							<option label="W3School" value="http://www.w3school.com.cn" />
+							<option label="Google" value="http://www.google.com" />
+							<option label="Microsoft" value="http://www.microsoft.com" />
+						</datalist>
+					</div>
+					<div class = "form-group">
+						<label for = "age">Age  </label>
+						<input type = "number" class="form-control"  id = "age" name = "age" min = "1" max = "100" required = "required"/>
+					</div>
+					<div class = "form-group">
+						<label for = "range">Range  </label>
+						<input type = "range" class="form-control"  id = "range" name = "range" min = "1" max = "20" value = "1"/>
+					</div>
+					<div class = "form-group">
+						<label for = "month">Month  </label>
+						<input type = "month" class="form-control"  id = "month" name = "month" />
+					</div>
+					<div class = "form-group">
+						<label for = "time">Time  </label>
+						<input type = "time" class="form-control"  id = "time" name = "time" />
+					</div>
+					<div class = "form-group">
+						<label for = "code">Country Code  </label>
+						<input type = "code" class="form-control"  id = "code" name = "code" pattern = "[A-z]{3}" title="Three letter country code" />
+					</div>
+					<div class = "form-group form-check">
+						<input type = "checkbox"  class = "form-check-input" id = "rm"/>
+						<label for = "rm" class="form-check-label">Remember me</label>
+					</div>
+					<input type = "submit" formaction = "aa.jsp" class = "btn btn-outline-primary" value = "Submit-AA"/>											
+					<input type = "submit" formaction = "bb.jsp" class = "btn btn-outline-info" value = "Submit-BB"/>											
+				</form>
+				<div class = "form-group">
+						<label for = "oi">I still belong to the form  </label>
+						<input type = "text" class="form-control"  id = "oi" name = "oi" form = "info-form" placeholder = "I still belong to the form, even I am not in the form label."/>
+					</div>
+			</div>
+		</div>
+	</div>		
+</body>
+</html>

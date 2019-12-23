@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Storage</title>		
+		<link rel = "stylesheet" href = "css/bootstrap.min.css" media="screen"/>
+	</head>		
+<body>
+	<script>
+		if (localStorage.pagecount)
+			localStorage.pagecount=Number(localStorage.pagecount) +1;			
+		else
+			localStorage.pagecount=1;
+		document.getElementById("visitCnt").innerHTML("<span>You have visited : "+localStorage.pagecount+" times!</span>")
+		function setValue(){
+			alert('ok')
+			alert(localStorage.email)
+			alert(localStorage.passwd)
+		}
+		
+		function doSubmit(){
+			alert(document.getElementById("email").value)
+			alert(document.getElementById("passwd").value)
+			if(localStorage.email)
+				localStorage.email = document.getElementById("email").value;
+			localStorage.passwd = document.getElementById("passwd").value
+		}
+	</script>
+	<div class = "container" style = "margin-top:20px;">
+		<div class = "row">
+			<div class = "col-12">
+				<h3 id = "visitCnt">ok</h3>
+			</div>
+		</div>
+		<div class = "row">
+			<div class = "col-12">
+				<form>
+					<div class = "form-group">
+						<label for = "email">Email </label>
+						<input type = "text" class="form-control" id = "email" placeholder = "Email ..."/>
+						<small>We 'll never share you email with the others!!!</small>
+					</div>
+					<div class = "form-group">
+						<label for = "passwd">Password  </label>
+						<input type = "password" class="form-control"  id = "passwd"/>
+					</div>
+					<div class = "form-group form-check">
+						<input type = "checkbox"  class = "form-check-input" id = "rm"/>
+						<label for = "rm" class="form-check-label">Remember me</label>
+					</div>
+					<button onclick = "doSubmit();" class = "btn btn-outline-primary">Submit</button>		
+					<button onclick = "setValue();" class = "btn btn-outline-danger">Set</button>							
+				</form>
+			</div>
+		</div>
+	</div>		
+</body>
+</html>

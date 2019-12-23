@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Canvas</title>		
+		<link rel = "stylesheet" href = "css/bootstrap.min.css" media="screen"/>
+	</head>	
+<body>
+	<div class = "container" style = "margin-top:20px;">
+		<div class = "row">
+			<div class = "col-6">
+				<div class = "card" style="height:25rem;">
+					<div class = "card-header"><h3>Canvas Zone</h3></div>
+					<div class = "card-body">
+						<canvas id = "canvas" style="border:1px solid #c3c3c3;" height = "200px;"></canvas>						
+					</div>
+				</div>
+			</div>
+		</div><br>
+		<div class = "row">
+			<div class = "col-12">
+				<button onclick = "draw(1);" class = "btn btn-outline-primary">Rectangle</button>	
+				<button onclick = "draw(2);" class = "btn btn-outline-info">Line</button>	
+				<button onclick = "draw(3);" class = "btn btn-outline-success">Circle</button>					
+			</div>
+		</div>
+	</div>	
+	<script>
+		var canvas = document.getElementById("canvas");	
+		var cxt=canvas.getContext("2d");
+		function draw(type){			
+			if(type == 1){									
+				cxt.fillStyle="#18ee88";
+				cxt.fillRect(0,0,150,75);
+			}
+			if(type == 2){
+				cxt.moveTo(150,75);
+				cxt.lineTo(200,100);
+				cxt.stroke();
+			}
+			if(type == 3){
+				cxt.fillStyle="#FF0000";
+				cxt.beginPath();
+				cxt.arc(150,75,50,0,Math.PI*2,true);
+				cxt.closePath();
+				cxt.fill();
+			}
+		}
+	</script>
+</body>
+</html>
