@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo 3 单双向数据及事件绑定</title>
+	</head>
+	<body>
+		<div id = "app"></div>
+	</body>
+	<script type = "text/javascript" src = "vue.js"></script>
+	<script type = "text/javascript">
+		new Vue({
+			el:"#app",
+			template:`
+				<div>
+					<h2>单向数据绑定 : </h2>
+					<input type = "text" :value = "txt"><br>
+					<h2>双向数据绑定 : </h2>
+					<input type = "text" v-model = "txt"><br>
+					<h2>事件绑定 : </h2>
+					<button @click = "txt='I have changed by the button'">Change Value</button>
+					<button @click = "clickMe">Click Me</button>
+				</div>
+			`,
+			data:function(){
+				return {
+					txt:"Hello Text"
+				}
+			},
+			methods:{
+				clickMe:function(){
+					alert('You have clicked me!!!')
+				}
+			}
+		})
+	</script>
+</html>

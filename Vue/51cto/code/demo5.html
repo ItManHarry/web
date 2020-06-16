@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo 5 监听&计算属性</title>
+	</head>
+	<body>
+		<div id = "app"></div>
+	</body>
+	<script type = "text/javascript" src = "vue.js"></script>
+	<script type = "text/javascript">		
+		new Vue({
+			el:"#app",
+			template:`
+				<div>
+					普通监听：<input type = "text" v-model = "name"><br>
+					深度监听：<input type = "text" v-model = "man.age"><br>
+					计算属性：
+					(<input type = "text" v-model = "n1"> + <input type = "text" v-model = "n2">) * <input type = "text" v-model = "n3">={{result}}
+				</div>
+			`,
+			data:function(){
+				return {
+					name:'',
+					man:{
+						age:0						
+					},
+					n1:'',
+					n2:'',
+					n3:''
+				}
+			},
+			//计算属性必须放于监听之前紧跟data属性
+			computed: {
+				result() {
+				  return (Number(this.n1) + Number(this.n2)) * Number(this.n3)
+				}
+			},
+			watch:{
+				name(newValue, oldValue){
+					alert('New Value : ' + newValue + ', Old value : ' + oldValue)
+				},
+				man:{
+					handler(newVal, oldVal){
+						if(newVal.age >= 35)
+							alert('You are old ...')
+					},
+					deep:true	//开启深度监听
+				}
+			}			
+		})
+	</script>
+</html>

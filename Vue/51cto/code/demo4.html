@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo 4 过滤器</title>
+	</head>
+	<body>
+		<div id = "app"></div>
+	</body>
+	<script type = "text/javascript" src = "vue.js"></script>
+	<script type = "text/javascript">
+		//全局过滤器
+		Vue.filter('reversal3',function(v,t){
+			return t + v.split('').reverse().join('')
+		})
+		new Vue({
+			el:"#app",
+			template:`
+				<div>
+					Input ： <input type = "text" v-model = "instr"><br>
+					Output: {{instr}}<br>
+					Reverse Output1: {{instr|reversal1}}<br>
+					{{instr|reversal2('Reverse Output2: ')}}<br>
+					{{instr|reversal3('Reverse Output3: ')}}
+				</div>
+			`,
+			data:function(){
+				return {
+					instr:''
+				}
+			},
+			//组件内过滤器
+			filters:{
+				reversal1(v){
+					return v.split('').reverse().join('')
+				},
+				reversal2(v,t){
+					return t + v.split('').reverse().join('')
+				}
+			}
+		})
+	</script>
+</html>
