@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo 2 常用指令</title>
+	</head>
+	<body>
+		<div id = "app"></div>
+	</body>
+	<script type = "text/javascript" src = "vue.js"></script>
+	<script type = "text/javascript">
+		new Vue({
+			el:"#app",
+			template:`
+				<div>
+					<div>This is my template, {{msg}}</div>
+					<span v-text='txt'></span>
+					<div v-html = 'html'></div>
+					<div v-if = "show">You can see me!</div>
+					<button v-if = "n == 1">Button1</button>
+					<button v-else-if = "n == 2">Button2</button>
+					<button v-else>Button3</button>	
+					<span v-show = "show">Show me</span>
+					<ul>
+						<li v-for = "(item,index) in items">{{item}}-{{index}}</li>
+					</ul>
+					<ul>
+						<li v-for = "(o,k,i) in obs">Key : {{k}}, value : {{o}}, index : {{i}}</li>
+					</ul>
+				</div>
+			`,
+			data:function(){
+				return {
+					msg:'Hello Vue',
+					txt:'I am a Text',
+					html:'<h2>I am a html</h2>',
+					show:true,
+					n:4,
+					items:[1,2,3,4,5,6,7],
+					obs:{
+						name:'Harry',
+						age:28,
+						sex:'M'
+					}
+				}
+			}
+		})
+	</script>
+</html>

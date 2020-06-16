@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo 1 Vue示例</title>
+	</head>
+	<body>
+		<div id = "app"></div>
+	</body>
+	<script type = "text/javascript" src = "vue.js"></script>
+	<script type = "text/javascript">
+		new Vue({
+			el:"#app",
+			template:`
+				<div>
+					<div>This is my template, {{msg}}</div>
+					<span>Harry Port</span>
+				</div>
+			`,
+			data:function(){
+				return {
+					msg:'Hello Vue'
+				}
+			}
+		})
+	</script>
+</html>
