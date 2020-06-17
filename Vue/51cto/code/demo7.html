@@ -48,7 +48,7 @@
 			},
 			template:`
 				<div>
-					<parent>
+					<parent ref = "p">
 						<div slot = "hello">I am slot content</div>
 					</parent>										
 				</div>
@@ -57,6 +57,9 @@
 				return {
 					
 				}
+			},
+			mounted(){
+				console.log("Parent message is : " + this.$refs.p.msg)
 			}
 		})
 	</script>
