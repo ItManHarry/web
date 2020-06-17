@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo 7 slot插槽和ref、$parent</title>
+	</head>
+	<body>
+		<div id = "app"></div>
+	</body>
+	<script type = "text/javascript" src = "vue.js"></script>
+	<script type = "text/javascript">		
+		var Child = {
+			template:`
+				<div>I am child component</div>
+			`,
+			data(){
+				return {
+					name:"Harry"
+				}
+			},
+			created(){
+				console.log("Parent data msg value is : "+this.$parent.msg)
+			}
+		}
+		var  Parent = {
+			template:`
+				<div>
+					I am parent component
+					<slot name = 'hello'></slot>
+					<child ref = "cc"></child>
+				</div>
+			`,
+			data(){
+				return {
+					msg:"I am Parent "
+				}
+			},
+			components:{
+				Child
+			},
+			mounted(){
+				console.log("Child data name value is : "+this.$refs.cc.name)
+			}
+		}		
+		new Vue({
+			el:"#app",
+			components:{
+				Parent
+			},
+			template:`
+				<div>
+					<parent>
+						<div slot = "hello">I am slot content</div>
+					</parent>										
+				</div>
+			`,			
+			data:function(){
+				return {
+					
+				}
+			}
+		})
+	</script>
+</html>

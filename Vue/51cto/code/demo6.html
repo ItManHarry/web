@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo 6 组件化开发</title>
+	</head>
+	<body>
+		<div id = "app"></div>
+	</body>
+	<script type = "text/javascript" src = "vue.js"></script>
+	<script type = "text/javascript">		
+		//以下是语法糖方式创建
+		var MyHeader = {
+			template:`
+				<div><h1>组件化开发</h1></div>
+			`
+		}
+		var MyBody = {
+			template:`
+				<div><h3>I am Body ...</h3></div>
+			`
+		}
+		//Vue扩展创建
+		var MyFooter = Vue.extend({
+			template:`
+				<div><h3>I am Footer ...</h3></div>
+			`
+		})
+		//全局组件 - 可直接使用
+		Vue.component('MyNav',{
+				template:`
+					<div><h3>I am Nav ...</h3></div>
+				`
+		})
+		new Vue({
+			el:"#app",
+			components:{
+				MyHeader, MyBody,MyFooter
+			},
+			template:`
+				<div>
+					<my-header></my-header>					
+					<my-body></my-body>
+					<my-nav></my-nav>
+					<my-footer></my-footer>
+				</div>
+			`,			
+			data:function(){
+				return {
+					
+				}
+			}
+		})
+	</script>
+</html>

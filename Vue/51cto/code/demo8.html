@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo 8 父子组件通信</title>
+	</head>
+	<body>
+		<div id = "app"></div>
+	</body>
+	<script type = "text/javascript" src = "vue.js"></script>
+	<script type = "text/javascript">		
+		var Child = {
+			template:`
+				<div>I am child component, Value from Parent : {{propertyOfParent}}<br><button @click = "sendMsgToParent">Git message to Parent</button></div>
+			`,
+			data(){
+				return {
+					name:"Harry"
+				}
+			},
+			props:[
+				'propertyOfParent'
+			],
+			methods:{
+				sendMsgToParent(){
+					this.$emit('childValue', 'DataFromChild1','DataFromChild2')
+				}
+			},
+			created(){
+				console.log("Parent data msg value is : "+this.$parent.msg + "; Property from parent is : " + this.propertyOfParent)
+			}
+		}
+		var  Parent = {
+			template:`
+				<div>
+					I am parent component
+					<slot name = 'hello'></slot>
+					<child ref = "cc" propertyOfParent = "ParentCompentValue" @childValue = "reverseTheValue"></child>
+				</div>
+			`,
+			data(){
+				return {
+					msg:"I am Parent ",
+					v1:'',
+					v2:''
+				}
+			},
+			components:{
+				Child
+			},
+			methods:{
+				reverseTheValue(val1, val2){
+					alert("Value 1 : " + val1 + ", value 2 : " + val2)
+					this.v1 = val1;
+					this.v2 = val2;
+					console.log("Data from child value1 is : " + this.v1 + ", value 2 : " + this.v2)
+				}
+			},
+			mounted(){
+				console.log("Child data name value is : "+this.$refs.cc.name)				
+			}
+		}		
+		new Vue({
+			el:"#app",
+			components:{
+				Parent
+			},
+			template:`
+				<div>
+					<parent>
+						<div slot = "hello">I am slot content</div>
+					</parent>										
+				</div>
+			`,			
+			data:function(){
+				return {
+					
+				}
+			}
+		})
+	</script>
+</html>

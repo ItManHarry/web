@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo 9 非父子组件通信</title>
+	</head>
+	<body>
+		<div id = "app"></div>
+	</body>
+	<script type = "text/javascript" src = "vue.js"></script>
+	<script type = "text/javascript">		
+		Vue.prototype.$bus = new Vue();	//中央处理组件
+		var Child1 = {
+			template:`
+				<div>
+					<h2>I am child component 1 of  Parent 1</h2>
+					<h3>Data From Parent2's child3 : <span style = 'color:red'>{{child3Val}}</span></h3>
+				</div>
+			`,
+			data(){
+				return {
+					childName1:"Child1",
+					child3Val:''
+				}
+			},
+			methods:{
+				
+			},
+			created(){
+				var self = this
+				self.$bus.$on('dataFromChild3', function(v){
+					self.child3Val = v
+				})
+			}
+		}
+		var Child2 = {
+			template:`
+				<div>
+					<h2>I am child component 2 of Parent 1</h2>
+					<h3>Data From Parent2's child3 : <span style = 'color:red'>{{child3Val}}</span></h3>
+					<button @click = "sendData(200,300)">Send data to other components</button>
+				</div>
+			`,
+			data(){
+				return {
+					childName2:"Child2",
+					child3Val:'',
+					child4Val:''
+				}
+			},
+			methods:{
+				sendData(v1,v2){
+					this.$bus.$emit('dataFromChild2',v1,v2)
+				}
+			},
+			created(){
+				this.$bus.$on('dataFromChild3', v=>{
+					this.child3Val = v
+				})
+			}
+		}
+		var Child3 = {
+			template:`
+				<div>
+					<h2>I am child component 1 of Parent 2</h2>
+					<button @click = "sendData(100)">Send data to other components</button>
+					<h3>Data From Parent1's child2  value 1 is : <span style = 'color:red'>{{child2Val1}}</span>, value 2 is :<span style = 'color:red'> {{child2Val2}}</span></h3>
+				</div>
+			`,
+			data(){
+				return {
+					childName3:"Child3",
+					child2Val1:'',
+					child2Val2:''
+				}
+			},
+			methods:{
+				sendData(v){
+					this.$bus.$emit('dataFromChild3', v)
+				}
+			},
+			created(){
+				this.$bus.$on('dataFromChild2', (v1, v2) =>{
+					this.child2Val1 = v1
+					this.child2Val2 = v2
+				})
+			}
+		}
+		var Child4 = {
+			template:`
+				<div>
+					<h2>I am child component 2 of Parent 2</h2>
+					<h3>Data From Parent1's child2  value 1 is : <span style = 'color:red'>{{child2Val1}}</span>, value 2 is : <span style = 'color:red'>{{child2Val2}}</span></h3>
+				</div>
+			`,
+			data(){
+				return {
+					childName4:"Child4",
+					child2Val1:'',
+					child2Val2:''
+				}
+			},
+			methods:{
+				
+			},
+			created(){
+				this.$bus.$on('dataFromChild2', (v1, v2) =>{
+					this.child2Val1 = v1
+					this.child2Val2 = v2
+				})
+			}
+		}
+		var  Parent1 = {
+			template:`
+				<div>
+					I am parent component	 1				
+					<child1 ref = "child1"></child1>
+					<child2 ref = "child2"></child2>
+				</div>
+			`,
+			data(){
+				return {
+					msg:"I am Parent1 ",
+					v1:'',
+					v2:''
+				}
+			},
+			components:{
+				Child1,Child2
+			},
+			methods:{
+				
+			},
+			mounted(){
+						
+			}
+		}		
+		var  Parent2 = {
+			template:`
+				<div>
+					I am parent component	 2			
+					<child3 ref = "child3"></child3>
+					<child4 ref = "child4"></child4>
+				</div>
+			`,
+			data(){
+				return {
+					msg:"I am Parent2 ",
+					v1:'',
+					v2:''
+				}
+			},
+			components:{
+				Child3,Child4
+			},
+			methods:{
+				
+			},
+			mounted(){
+						
+			}
+		}		
+		new Vue({
+			el:"#app",
+			components:{
+				Parent1,Parent2
+			},
+			template:`
+				<div>
+					<parent1></parent1>			
+					<hr>				
+					<parent2></parent2>							
+				</div>
+			`,			
+			data:function(){
+				return {
+					
+				}
+			}
+		})
+	</script>
+</html>
