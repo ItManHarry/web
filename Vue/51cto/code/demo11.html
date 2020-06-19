@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo 11 路由跳转原理</title>
+	</head>
+	<body>
+		<div id = "app"></div>
+		<a href = "#/login">Login</a>
+		<a href = "#/register">Register</a>
+	</body>
+	<script type = "text/javascript" src = "vue.js"></script>
+	<script type = "text/javascript">		
+		var app = document.getElementById('app')
+		window.addEventListener('hashchange', function(e){
+			console.log(location.hash)
+			switch(location.hash){
+				case "#/login":
+					app.innerHTML= "To the Login Page"
+					break
+				case "#/register":
+					app.innerHTML = "To the Register Page"
+					break
+			}
+		})
+	</script>
+</html>
