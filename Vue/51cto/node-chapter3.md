@@ -242,3 +242,137 @@
 		1. :to传参的属性里 params是和name配对的， query和name或者path都可以
 		
 		2. 使用路由参数必须要配置路由规则里面配置好的参数名，否则刷新页面参数会丢失
+		
+```html
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<title>Demo 14 路由传参</title>
+		</head>
+		<body>		
+			<div id = "app"></div>
+		</body>
+		<script type = "text/javascript" src = "vue.js"></script>
+		<script type = "text/javascript" src = "vue-router.js"></script>
+		<script type = "text/javascript">	
+			var Login = {
+				template:`
+					<div style = 'color:red'>
+						The Login page
+						<span style = 'color:red'>Parameter from redirect : {{msg}}</span>
+					</div>
+				`,
+				data(){
+					return {
+						msg:''
+					}
+				},
+				created(){
+					this.msg = this.$route.query.id
+				}
+			}
+			var Register = {
+				template:`
+					<div style = 'color:green'>
+						The Register page
+						<span style = 'color:green'>Parameter from redirect : {{name}}</span>
+					</div>
+				`,
+				data(){
+					return {
+						name:''
+					}
+				},
+				created(){
+					this.name = this.$route.params.name
+				}
+			}
+			var Shopping = {
+				template:`
+					<div style = 'color:blue'>
+						The Shopping page
+						<span style = 'color:blue'>Thing to buy : {{good}}</span>
+					</div>
+				`,
+				props:[
+					'good'
+				]
+			}
+			var Chart = {
+				template:`
+					<div style = 'color:black'>
+						The Chart page
+						<span style = 'color:red'>Chart list : {{list}}</span>
+					</div>
+				`,
+				props:[
+					'list'
+				]
+			}
+			var Buy = {
+				template:`
+					<div>
+						The Buy page
+						<span style = 'color:#38a'>Buy list : {{bought}}</span>
+					</div>
+				`,
+				data(){
+					return {
+						bought:''
+					}
+				},
+				created(){
+					this.bought = this.$route.query.bought
+				}
+			}
+			//安装路由插件
+			Vue.use(VueRouter);
+			//创建路由对象
+			var rs = new VueRouter({
+				routes:[
+					{path:'/login',name:'login',component:Login},
+					{path:'/register/:name',name:'register',component:Register},
+					//通过属性接收路由参数[props设为true]
+					{path:'/shopping/:good',name:'shopping',props:true,component:Shopping},
+					{path:'/chart/:list',name:'chart',props:true,component:Chart},
+					{path:'/buy/:bought',name:'buy',props:true,component:Buy}
+				]
+			});
+			new Vue({
+				el:"#app",
+				router:rs,//指定路由
+				template:`
+					<div>						
+						<!-- 标签跳转 -->		
+						Router link : <router-link :to = "{name:'login',query:{id:'abcd'}}">Go to Login</router-link>
+						<router-link :to = "{name:'register',params:{name:'Harry'}}">Go to Register</router-link>
+						<router-link :to = "{name:'shopping',params:{good:'iPhoneSE2'}}">Go to Shopping</router-link><br>				
+						Router JS : 					
+						<button @click = "toChart">To Chart</button>
+						<button @click = "toBuy">To Buy</button>
+						<button @click = "back">Back</button>
+						<router-view></router-view>						
+					</div>
+				`,			
+				data(){
+					return {
+						
+					}
+				},
+				methods:{			
+					toChart(){
+						/*由于动态路由也是传递params的，所以在 this.$router.push() 方法中 path不能和params一起使用，
+						否则params将无效。需要用name来指定页面。*/
+						this.$router.push({name:'chart',params:{list:'ChatListIs...'}})
+					},
+					toBuy(){
+						this.$router.push({name:'buy',query:{bought:'Apples'}})
+					},
+					back(){
+						this.$router.go(-1)
+					}
+				}
+			})
+		</script>
+	</html>
+```

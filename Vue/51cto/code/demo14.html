@@ -54,8 +54,30 @@
 		}
 		var Chart = {
 			template:`
-				<div style = 'color:blue'>The Chart page</div>
-			`
+				<div style = 'color:black'>
+					The Chart page
+					<span style = 'color:red'>Chart list : {{list}}</span>
+				</div>
+			`,
+			props:[
+				'list'
+			]
+		}
+		var Buy = {
+			template:`
+				<div>
+					The Buy page
+					<span style = 'color:#38a'>Buy list : {{bought}}</span>
+				</div>
+			`,
+			data(){
+				return {
+					bought:''
+				}
+			},
+			created(){
+				this.bought = this.$route.query.bought
+			}
 		}
 		//安装路由插件
 		Vue.use(VueRouter);
@@ -66,7 +88,8 @@
 				{path:'/register/:name',name:'register',component:Register},
 				//通过属性接收路由参数[props设为true]
 				{path:'/shopping/:good',name:'shopping',props:true,component:Shopping},
-				{path:'/chart',name:'chart',component:Chart}
+				{path:'/chart/:list',name:'chart',props:true,component:Chart},
+				{path:'/buy/:bought',name:'buy',props:true,component:Buy}
 			]
 		});
 		new Vue({
@@ -80,6 +103,7 @@
 					<router-link :to = "{name:'shopping',params:{good:'iPhoneSE2'}}">Go to Shopping</router-link><br>				
 					Router JS : 					
 					<button @click = "toChart">To Chart</button>
+					<button @click = "toBuy">To Buy</button>
 					<button @click = "back">Back</button>
 					<router-view></router-view>						
 				</div>
@@ -91,7 +115,12 @@
 			},
 			methods:{			
 				toChart(){
-					this.$router.replace({path:'shopping'})
+					/*由于动态路由也是传递params的，所以在 this.$router.push() 方法中 path不能和params一起使用，
+					否则params将无效。需要用name来指定页面。*/
+					this.$router.push({name:'chart',params:{list:'ChatListIs...'}})
+				},
+				toBuy(){
+					this.$router.push({name:'buy',query:{bought:'Apples'}})
 				},
 				back(){
 					this.$router.go(-1)
