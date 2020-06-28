@@ -104,8 +104,9 @@
 					Router JS : 					
 					<button @click = "toChart">To Chart</button>
 					<button @click = "toBuy">To Buy</button>
+					<button @click = "toLogin">To Login</button>
 					<button @click = "back">Back</button>
-					<router-view></router-view>						
+					<router-view :key = "$route.fullPath"></router-view>						
 				</div>
 			`,			
 			data(){
@@ -121,6 +122,11 @@
 				},
 				toBuy(){
 					this.$router.push({name:'buy',query:{bought:'Apples'}})
+				},
+				toLogin(){
+					//js跳转路由传参和标签传参，路由相同而参数不同页面不刷新的问题
+					//解决方案：<router-view :key = "$route.fullPath"></router-view>
+					this.$router.push({name:'login',query:{id:'efgh'}})
 				},
 				back(){
 					this.$router.go(-1)

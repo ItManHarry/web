@@ -243,6 +243,9 @@
 		
 		2. 使用路由参数必须要配置路由规则里面配置好的参数名，否则刷新页面参数会丢失
 		
+		注：js跳转路由传参和标签传参，路由相同而参数不同页面不刷新的问题
+			  解决方案：<router-view :key = "$route.fullPath"></router-view>
+		
 ```html
 	<!DOCTYPE html>
 	<html>
@@ -350,8 +353,9 @@
 						Router JS : 					
 						<button @click = "toChart">To Chart</button>
 						<button @click = "toBuy">To Buy</button>
+						<button @click = "toLogin">To Login</button>
 						<button @click = "back">Back</button>
-						<router-view></router-view>						
+						<router-view :key = "$route.fullPath"></router-view>						
 					</div>
 				`,			
 				data(){
@@ -368,9 +372,252 @@
 					toBuy(){
 						this.$router.push({name:'buy',query:{bought:'Apples'}})
 					},
+					toLogin(){
+						//js跳转路由传参和标签传参，路由相同而参数不同页面不刷新的问题
+						//解决方案：<router-view :key = "$route.fullPath"></router-view>
+						this.$router.push({name:'login',query:{id:'efgh'}})
+					},
 					back(){
 						this.$router.go(-1)
 					}
+				}
+			})
+		</script>
+	</html>
+```
+
+## 嵌套路由
+
+	1. router-view的细分
+	
+		router-view包含一个router-view
+		
+	2. 每个坑都对应一个组件
+	
+	3. 路由配置
+
+```html
+	routes:[
+		{
+			path:"/nav",
+			name:"nav",
+			component:Nav,
+			//路由嵌套增加此属性
+			children:[
+				//配置嵌套的子路由
+			]
+		}
+	]
+```
+
+```html
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<title>Demo 15 路由嵌套</title>
+		</head>
+		<body>		
+			<div id = "app"></div>
+		</body>
+		<script type = "text/javascript" src = "vue.js"></script>
+		<script type = "text/javascript" src = "vue-router.js"></script>
+		<script type = "text/javascript">	
+			var Nav = {
+				template:`
+					<div>							
+						<router-link :to = "{name:'nav.index'}">Home</router-link>			|
+						<router-link :to = "{name:'nav.login'}">Login</router-link>			|
+						<router-link :to = "{name:'nav.personal'}">Personal</router-link>			|
+						<router-link :to = "{name:'nav.mine'}">Mine</router-link>			
+						<router-view></router-view>
+					</div>
+				`
+			}
+			var Index = {
+				template:`
+					<div>
+						<h1>Home Page</h1>
+					</div>
+				`
+			}
+			var Login = {
+				template:`
+					<div>
+						<h2>Login Page</h2>
+					</div>
+				`
+			}
+			var Personal = {
+				template:`
+					<div>
+						<h2>Personal Page</h2>
+					</div>
+				`
+			}
+			var Mine = {
+				template:`
+					<div>
+						<h2>My Page</h2>
+					</div>
+				`
+			}
+			//安装路由插件
+			Vue.use(VueRouter);
+			//创建路由对象
+			var rs = new VueRouter({
+				routes:[
+					{
+						path:'/nav',
+						name:'nav',
+						component:Nav,
+						children:[
+							//嵌套路由
+							{path:'',redirect:'/nav/index'},//子路径为空是，默认显示主页
+							{path:'index',name:'nav.index',component:Index},
+							{path:'login',name:'nav.login',component:Login},
+							{path:'personal',name:'nav.personal',component:Personal},
+							{path:'mine',name:'nav.mine',component:Mine}
+						]
+					}
+				]
+			});
+			new Vue({
+				el:"#app",
+				router:rs,//指定路由
+				template:`
+					<div>						
+							<router-view></router-view>
+					</div>
+				`,			
+				data(){
+					return {
+						
+					}
+				},
+				methods:{			
+					
+				}
+			})
+		</script>
+	</html>
+```
+
+## 路由守卫
+
+	路由守卫主要是检查一下是否登录，没有登录就跳转到登录页面，但是现在这种处理方式主要通过请求的全局拦截来做。
+	
+```javascript
+	const router = new VueRouter(
+		{...}
+	)
+	
+	router.beforeEach((to, from, next) =>{
+		// ...
+	})
+	
+	router.afterEach((to, from) => {
+		// ...
+	})
+```
+
+```html
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<title>Demo 16 路由守卫</title>
+		</head>
+		<body>		
+			<div id = "app"></div>
+		</body>
+		<script type = "text/javascript" src = "vue.js"></script>
+		<script type = "text/javascript" src = "vue-router.js"></script>
+		<script type = "text/javascript">	
+			var Nav = {
+				template:`
+					<div>							
+						<router-link :to = "{name:'nav.index'}">Home</router-link>			|
+						<router-link :to = "{name:'nav.login'}">Login</router-link>			|
+						<router-link :to = "{name:'nav.personal'}">Personal</router-link>			|
+						<router-link :to = "{name:'nav.mine'}">Mine</router-link>			
+						<router-view></router-view>
+					</div>
+				`
+			}
+			var Index = {
+				template:`
+					<div>
+						<h1>Home Page</h1>
+					</div>
+				`
+			}
+			var Login = {
+				template:`
+					<div>
+						<h2>Login Page</h2>
+					</div>
+				`
+			}
+			var Personal = {
+				template:`
+					<div>
+						<h2>Personal Page</h2>
+					</div>
+				`
+			}
+			var Mine = {
+				template:`
+					<div>
+						<h2>My Page</h2>
+					</div>
+				`
+			}
+			//安装路由插件
+			Vue.use(VueRouter);
+			//创建路由对象
+			var router = new VueRouter({
+				routes:[
+					{
+						path:'/nav',
+						name:'nav',
+						component:Nav,
+						children:[
+							//嵌套路由						
+							{path:'',redirect:'/nav/index'},//子路径为空是，默认显示主页
+							{path:'index',name:'nav.index',component:Index},
+							{path:'login',name:'nav.login',component:Login},
+							{path:'personal',name:'nav.personal',component:Personal},
+							{path:'mine',name:'nav.mine',component:Mine}
+						]
+					}
+				]
+			});
+			new Vue({
+				el:"#app",
+				router:router,//指定路由
+				template:`
+					<div>						
+							<router-view></router-view>
+					</div>
+				`,			
+				data(){
+					return {
+						
+					}
+				},
+				methods:{			
+					
+				},
+				mounted(){
+					router.beforeEach((to, from, next)=>{
+						console.log(to)
+						if(to.path == "/nav/index"){
+							next()
+						}else{
+							setTimeout(function(){
+								next()
+							},2000)
+						}
+					})
 				}
 			})
 		</script>

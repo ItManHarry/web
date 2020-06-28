@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo 15 路由嵌套</title>
+	</head>
+	<body>		
+		<div id = "app"></div>
+	</body>
+	<script type = "text/javascript" src = "vue.js"></script>
+	<script type = "text/javascript" src = "vue-router.js"></script>
+	<script type = "text/javascript">	
+		var Nav = {
+			template:`
+				<div>							
+					<router-link :to = "{name:'nav.index'}">Home</router-link>			|
+					<router-link :to = "{name:'nav.login'}">Login</router-link>			|
+					<router-link :to = "{name:'nav.personal'}">Personal</router-link>			|
+					<router-link :to = "{name:'nav.mine'}">Mine</router-link>			
+					<router-view></router-view>
+				</div>
+			`
+		}
+		var Index = {
+			template:`
+				<div>
+					<h1>Home Page</h1>
+				</div>
+			`
+		}
+		var Login = {
+			template:`
+				<div>
+					<h2>Login Page</h2>
+				</div>
+			`
+		}
+		var Personal = {
+			template:`
+				<div>
+					<h2>Personal Page</h2>
+				</div>
+			`
+		}
+		var Mine = {
+			template:`
+				<div>
+					<h2>My Page</h2>
+				</div>
+			`
+		}
+		//安装路由插件
+		Vue.use(VueRouter);
+		//创建路由对象
+		var rs = new VueRouter({
+			routes:[
+				{
+					path:'/nav',
+					name:'nav',
+					component:Nav,
+					children:[
+						//嵌套路由						
+						{path:'',redirect:'/nav/index'},//子路径为空是，默认显示主页
+						{path:'index',name:'nav.index',component:Index},
+						{path:'login',name:'nav.login',component:Login},
+						{path:'personal',name:'nav.personal',component:Personal},
+						{path:'mine',name:'nav.mine',component:Mine}
+					]
+				}
+			]
+		});
+		new Vue({
+			el:"#app",
+			router:rs,//指定路由
+			template:`
+				<div>						
+						<router-view></router-view>
+				</div>
+			`,			
+			data(){
+				return {
+					
+				}
+			},
+			methods:{			
+				
+			}
+		})
+	</script>
+</html>
