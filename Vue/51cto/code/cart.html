@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>购物车</title>
+	</head>
+	<body>		
+		<div id = "app">
+			<hr>
+				图书 : <input type = "text" name = "book" v-model = "book">
+				价格 : <input type = "text" name = "price" v-model = "price">
+				<button @click = "addBook">添加</button>
+			<hr>
+			<h2>图书清单</h2>
+			<ul>
+				<li v-for = "(book,index) in books">
+					书名 : {{book.name}}, 价格 : {{book.price}}(￥) &nbsp;&nbsp;<button @click = "buyBook(index)">购买</button>
+				</li>
+			</ul>
+			<hr>
+			<h2>已购清单</h2>
+			<table width = "100%" style = "border-collapse:collapse;border:none;">
+				<tr>
+					<th style = "border:solid #000 1px;">选中</th>
+					<th style = "border:solid #000 1px;">课程</th>
+					<th style = "border:solid #000 1px;">单价</th>
+					<th style = "border:solid #000 1px;">数量</th>
+					<th style = "border:solid #000 1px;">总价</th>
+				</tr>
+				<tr v-for = "(book,index) in carts">
+					<td style = "border:solid #000 1px;"><input type = "checkbox" name = "ck" v-model = "book.active"></td>
+					<td style = "border:solid #000 1px;">{{book.name}}</td>
+					<td style = "border:solid #000 1px;">{{book.price}}</td>
+					<td style = "border:solid #000 1px;"><span @click = "less(index)">-</span>&nbsp;&nbsp;{{book.count}}&nbsp;&nbsp;<span @click = "more(index)">+</span></td>
+					<td style = "border:solid #000 1px;">{{book.price * book.count}}</td>
+				</tr>
+			</table>
+		</div>
+		<script type = "text/javascript" src = "vue.js"></script>
+		<script type = "text/javascript" src = "vue-router.js"></script>
+		<script type = "text/javascript">			
+			//安装路由插件
+			/*Vue.use(VueRouter);
+			//创建路由对象
+			var router = new VueRouter({
+				routes:[
+				
+				]
+			})*/
+			new Vue({
+				el:"#app",
+				//router:router,//指定路由				
+				data(){
+					return {
+						books:[
+							{name:'SpringBoot',price:20},
+							{name:'SpringCloud',price:40},
+							{name:'VueJS',price:30},
+							{name:'JAVA',price:60},
+							{name:'Python',price:100},
+							{name:'Groovy',price:20}
+						],
+						book:'',
+						price:'',
+						carts:[]
+					}
+				},
+				methods:{			
+					addBook(){
+						this.books.push({name:this.book,price:this.price})
+						this.book = ''
+						this.price = ''
+					},
+					buyBook(index){
+						const book = this.books[index]
+						const result = this.carts.find(v=>v.name == book.name)
+						if(result){
+							result.count += 1
+						}else{
+							this.carts.push({...book,count:1,active:true})
+						}
+					},
+					less(index){						
+						if(this.carts[index].count > 1)
+							this.carts[index].count--
+						else
+							if(window.confirm('是否删除${this.charts[index].name}?'))
+								this.carts.splice(index,1)
+					},
+					more(index){
+						this.carts[index].count++
+					}
+				},
+				mounted(){
+					
+				}
+			})
+		</script>
+	</body>	
+</html>
