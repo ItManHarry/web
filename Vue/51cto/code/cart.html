@@ -18,22 +18,7 @@
 			</ul>
 			<hr>
 			<h2>已购清单</h2>
-			<table width = "100%" style = "border-collapse:collapse;border:none;">
-				<tr>
-					<th style = "border:solid #000 1px;">选中</th>
-					<th style = "border:solid #000 1px;">课程</th>
-					<th style = "border:solid #000 1px;">单价</th>
-					<th style = "border:solid #000 1px;">数量</th>
-					<th style = "border:solid #000 1px;">总价</th>
-				</tr>
-				<tr v-for = "(book,index) in carts">
-					<td style = "border:solid #000 1px;"><input type = "checkbox" name = "ck" v-model = "book.active"></td>
-					<td style = "border:solid #000 1px;">{{book.name}}</td>
-					<td style = "border:solid #000 1px;">{{book.price}}</td>
-					<td style = "border:solid #000 1px;"><span @click = "less(index)">-</span>&nbsp;&nbsp;{{book.count}}&nbsp;&nbsp;<span @click = "more(index)">+</span></td>
-					<td style = "border:solid #000 1px;">{{book.price * book.count}}</td>
-				</tr>
-			</table>
+			<cart :carts = "carts"></cart>
 		</div>
 		<script type = "text/javascript" src = "vue.js"></script>
 		<script type = "text/javascript" src = "vue-router.js"></script>
@@ -46,9 +31,75 @@
 				
 				]
 			})*/
+			var Cart = {
+				template:`
+					<table width = "100%" style = "border-collapse:collapse;border:none;">
+						<tr>
+							<th style = "border:solid #000 1px;">选中</th>
+							<th style = "border:solid #000 1px;">课程</th>
+							<th style = "border:solid #000 1px;">单价</th>
+							<th style = "border:solid #000 1px;">数量</th>
+							<th style = "border:solid #000 1px;">总价</th>
+						</tr>
+						<tr v-for = "(book,index) in carts">
+							<td style = "border:solid #000 1px;"><input type = "checkbox" name = "ck" v-model = "book.active"></td>
+							<td style = "border:solid #000 1px;">{{book.name}}</td>
+							<td style = "border:solid #000 1px;">{{book.price}}</td>
+							<td style = "border:solid #000 1px;"><span @click = "less(index)">-</span>&nbsp;&nbsp;{{book.count}}&nbsp;&nbsp;<span @click = "more(index)">+</span></td>
+							<td style = "border:solid #000 1px;">{{book.price * book.count}}</td>
+						</tr>
+						<tr>
+							<td colspan = "2" style = "border:solid #000 1px;">已选课程 : {{selected}}/{{all}}</td>
+							<td colspan = "3" style = "border:solid #000 1px;">应付金额 : {{totalPrice}}</td>
+						</tr>
+					</table>
+				`,
+				props:[
+					'carts'
+				],
+				computed:{
+					selected(){
+						return this.carts.filter(v=>v.active).length
+					},
+					all(){
+						return this.carts.length
+					},
+					totalPrice(){
+						let total = 0
+						this.carts.forEach(v =>{
+							if(v.active) 
+								total += v.price * v.count
+						})
+						return total
+					}
+				},
+				watch:{
+					//实现本地存储
+					carts:{
+						handler(){
+							window.localStorage.setItem('cart', JSON.stringify(this.carts))
+						},deep:true
+					}					
+				},
+				methods:{
+					less(index){						
+						if(this.carts[index].count > 1)
+							this.carts[index].count--
+						else
+							if(window.confirm('是否删除${this.charts[index].name}?'))
+								this.carts.splice(index,1)
+					},
+					more(index){
+						this.carts[index].count++
+					}
+				}
+			}
 			new Vue({
 				el:"#app",
-				//router:router,//指定路由				
+				//router:router,//指定路由		
+				components:{
+					Cart
+				},
 				data(){
 					return {
 						books:[
@@ -78,20 +129,10 @@
 						}else{
 							this.carts.push({...book,count:1,active:true})
 						}
-					},
-					less(index){						
-						if(this.carts[index].count > 1)
-							this.carts[index].count--
-						else
-							if(window.confirm('是否删除${this.charts[index].name}?'))
-								this.carts.splice(index,1)
-					},
-					more(index){
-						this.carts[index].count++
 					}
 				},
-				mounted(){
-					
+				created(){
+					this.carts = JSON.parse(window.localStorage.getItem('cart'))
 				}
 			})
 		</script>
