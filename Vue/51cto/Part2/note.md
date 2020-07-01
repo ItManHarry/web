@@ -14,7 +14,16 @@
 	
 	4. http请求功能键axios
 	
-## Mock
+## anxios
+
+安装：npm install anxios
+
+使用：main.js
+
+```javascript
+	import axios from 'axios'
+	Vue.prototype.$http = axios
+```
 
 
 

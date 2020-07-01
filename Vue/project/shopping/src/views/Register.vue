@@ -1,5 +1,6 @@
 <template>
     <div>
+        <img src = '../assets/register/logo.png' class = 'imgheader' alt = '注册'> 
         <cube-form
             :model="model"
             :schema="schema"            
@@ -72,10 +73,17 @@ export default {
         submitHandler(e){
             e.preventDefault()
             console.log('执行注册')
+            this.$http.get('/api/register',{params:this.model}).then(res => {
+
+            }).catch(error => {
+                console.log(error)
+            })
         }
     }
 }
 </script>
 <style lang = "stylus" scoped>
-
+    .imgheader
+        height 150px
+        width 100%
 </style>
