@@ -9,7 +9,7 @@ Vue.use(VueRouter)
   const routes = [
   {
     path: '/',
-    name: 'register',
+    name: 'index',
     redirect:'/login' //重定向
   },
   {

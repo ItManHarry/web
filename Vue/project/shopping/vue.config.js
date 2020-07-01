@@ -36,7 +36,14 @@ module.exports = {
               let tokenKey = 'qwerasdfzxcv123'
               app.get('/api/login', (request, response) => {
                 const {name,pwd} = request.query
-                if(name == 'harry' && pwd == '123456'){
+                const count = users.filter(v => v.name == name).length
+                if(count <= 0){
+                  response.json({
+                    code:0,
+                    message:'用户不存在!',
+                    token:'null'
+                  })
+                }else if(name == 'user01' && pwd == '123456'){
                   response.json({
                     code:1,
                     message:'登录成功!',
@@ -44,8 +51,9 @@ module.exports = {
                   })
                 }else{
                   response.json({
-                    code:0,
-                    message:'账号或密码错误!'
+                    code:2,
+                    message:'账号或密码错误!',
+                    token:'null'
                   })
                 }
               })

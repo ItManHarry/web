@@ -70,7 +70,11 @@ export default {
             console.log('执行登录')
             this.$http.get('/api/login',{params:this.model}).then(res => {
                 console.log(res)
-                console.log("Code : " + res.data.code + ", message : " + res.data.message)
+                //alert("Code : " + res.data.code + ", message : " + res.data.message + ', token : ' + res.data.token)
+                if(res.data.code == 0){
+                    alert(res.data.message)
+                    this.$router.push({path:'/register'})
+                }
             }).catch(error => {
                 console.log(error)
             })
