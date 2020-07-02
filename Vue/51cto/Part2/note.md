@@ -25,5 +25,18 @@
 	Vue.prototype.$http = axios
 ```
 
+## 开发经验
+
+1. 导入的组件必须使用，否则编译失败
+
+2. 组件导入使用驼峰命名，对应标签用“-”分开，否则编译失败
+
+```
+	//导入
+	import DataTabel from "./DataTabel.vue"
+	//使用
+	<data-tabel :tableData="tableData"></data-tabel>
+```
+
 
 

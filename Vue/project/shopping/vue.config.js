@@ -40,7 +40,7 @@ module.exports = {
                 if(count <= 0){
                   response.json({
                     code:0,
-                    message:'用户不存在!',
+                    message:'用户不存在,请注册!',
                     token:'null'
                   })
                 }else if(name == 'user01' && pwd == '123456'){

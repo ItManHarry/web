@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src = '../assets/register/logo.png' class = 'imgheader' alt = '注册'> 
+        <img src = '../assets/register/logo.png' class = 'imgheader'> 
         <cube-form
             :model="model"
             :schema="schema"            
