@@ -65,7 +65,7 @@ export default {
         }
     },
     methods:{
-        submitHandler(e){
+        /*submitHandler(e){
             e.preventDefault()
             console.log('执行登录')
             this.$http.get('/api/login',{params:this.model}).then(res => {
@@ -78,6 +78,23 @@ export default {
             }).catch(error => {
                 console.log(error)
             })
+        }*/
+        async submitHandler(e){
+            e.preventDefault()
+            try{
+                const result = await this.$http.get('/api/login', {params:this.model})
+                console.log('Token : ' + result.token)
+                if(result.code == 1){
+                    alert(result.message)
+                    //保存token
+                    this.$store.commit('setToken', result.token)
+                    window.localStorage.setItem('token', result.token)
+                }else{
+                    alert(result.message)
+                }
+            }catch(error){
+                console.log('Error : ' + error)
+            }
         }
     }
 }

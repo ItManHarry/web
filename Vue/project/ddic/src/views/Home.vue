@@ -45,3 +45,10 @@ export default {
   }
 };
 </script>
+<style scoped>
+  #el-menu-demo{
+    margin : 0px;
+    padding : 0px;
+  }
+  
+</style>

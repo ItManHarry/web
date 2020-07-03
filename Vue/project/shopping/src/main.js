@@ -5,7 +5,8 @@ import router from './router'
 import store from './store'
 import 'amfe-flexible'
 import axios from 'axios'
-
+import setAxios from './setAxios.js'
+setAxios()
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
 new Vue({
