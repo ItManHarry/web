@@ -9,7 +9,7 @@
             </cube-slide-item>
         </cube-slide>
         <!-- 滚动分类 -->
-        <cube-slide ref = "rolling" :data = "lists">
+        <cube-slide ref = "rolling" :data = "lists" :loop = "false" :auto-play = "false">
             <cube-slide-item v-for="(list, index) in lists" :key="index">
                 <ul class = "listul">
                     <li class = "listli" v-for = "(item, i) in list" :key = "i">

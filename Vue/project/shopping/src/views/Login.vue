@@ -89,6 +89,8 @@ export default {
                     //保存token
                     this.$store.commit('setToken', result.token)
                     window.localStorage.setItem('token', result.token)
+                    //防止回退至登录页面,此处使用replace方法进行跳转
+                    this.$router.replace({path:'/index'})
                 }else{
                     alert(result.message)
                 }

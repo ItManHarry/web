@@ -105,3 +105,40 @@
 	//使用
 	<data-tabel :tableData="tableData"></data-tabel>
 ```
+
+3. 嵌套路由的path不要再加“/”,否则路由无法找到
+
+```javascript
+	{
+		path: '/footer',
+		name: 'Footer',
+		component: () => import('../views/Footer.vue'),
+		children:[
+		  {
+			path: 'index',
+			name: 'Index',
+			component: () => import('../views/Index.vue')
+		  },
+		  {
+			path: 'lists',
+			name: 'Index',
+			component: () => import('../views/Lists.vue')
+		  },
+		  {
+			path: 'search',
+			name: 'Index',
+			component: () => import('../views/Search.vue')
+		  },
+		  {
+			path: 'cart',
+			name: 'Index',
+			component: () => import('../views/Cart.vue')
+		  },
+		  {
+			path: 'mine',
+			name: 'Index',
+			component: () => import('../views/Mine.vue')
+		  }
+		]
+	  }
+```

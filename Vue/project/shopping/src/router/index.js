@@ -27,6 +27,43 @@ Vue.use(VueRouter)
     path: '/index',
     name: 'Index',
     component: () => import('../views/Index.vue')
+  },
+  {
+    path: '/footer',
+    name: 'Footer',
+    component: () => import('../views/Footer.vue'),
+    children:[
+      {
+        path:'',
+        name:'Home',
+        redirect:'index'
+      },
+      {
+        path: 'index',
+        name: 'Index',
+        component: () => import('../views/Index.vue')
+      },
+      {
+        path: 'lists',
+        name: 'Index',
+        component: () => import('../views/Lists.vue')
+      },
+      {
+        path: 'search',
+        name: 'Index',
+        component: () => import('../views/Search.vue')
+      },
+      {
+        path: 'cart',
+        name: 'Index',
+        component: () => import('../views/Cart.vue')
+      },
+      {
+        path: 'mine',
+        name: 'Index',
+        component: () => import('../views/Mine.vue')
+      }
+    ]
   }
 ]
 
