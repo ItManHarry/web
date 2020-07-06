@@ -76,6 +76,106 @@ module.exports = {
                   ]
                 })
               })
+              //滚动分类接口
+              app.get('/api/rollings', (req, res) => {
+                res.json({
+                  data:[
+                    [
+                      {
+                        url: '/login',
+                        image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png',
+                        label:'数码'
+                      },
+                      {
+                        url: 'http://www.didichuxing.com/',
+                        image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png',
+                        label:'数码'
+                      },
+                      {
+                        url: 'http://www.didichuxing.com/',
+                        image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide03.png',
+                        label:'数码'
+                      },
+                      {
+                        url: '/login',
+                        image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png',
+                        label:'数码'
+                      },
+                      {
+                        url: 'http://www.didichuxing.com/',
+                        image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png',
+                        label:'数码'
+                      },
+                      {
+                        url: 'http://www.didichuxing.com/',
+                        image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide03.png',
+                        label:'数码'
+                      },
+                      {
+                        url: '/login',
+                        image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png',
+                        label:'数码'
+                      },
+                      {
+                        url: 'http://www.didichuxing.com/',
+                        image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png',
+                        label:'数码'
+                      },
+                      {
+                        url: 'http://www.didichuxing.com/',
+                        image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide03.png',
+                        label:'数码'
+                      }
+                    ],[
+                      {
+                        url: '/login',
+                        image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png',
+                        label:'美食'
+                      },
+                      {
+                        url: 'http://www.didichuxing.com/',
+                        image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png',
+                        label:'美食'
+                      },
+                      {
+                        url: 'http://www.didichuxing.com/',
+                        image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide03.png',
+                        label:'美食'
+                      },
+                      {
+                        url: '/login',
+                        image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png',
+                        label:'美食'
+                      },
+                      {
+                        url: 'http://www.didichuxing.com/',
+                        image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png',
+                        label:'美食'
+                      },
+                      {
+                        url: 'http://www.didichuxing.com/',
+                        image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide03.png',
+                        label:'美食'
+                      },
+                      {
+                        url: '/login',
+                        image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png',
+                        label:'美食'
+                      },
+                      {
+                        url: 'http://www.didichuxing.com/',
+                        image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png',
+                        label:'美食'
+                      },
+                      {
+                        url: 'http://www.didichuxing.com/',
+                        image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide03.png',
+                        label:'美食'
+                      }
+                    ]
+                  ]
+                })
+              })
             }
         }        
     },
