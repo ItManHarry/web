@@ -176,6 +176,167 @@ module.exports = {
                   ]
                 })
               })
+              //分类清单数据
+              app.get('/api/classify', (req, res) => {
+                  switch(req.query.type){
+                    case '0' :
+                      res.json({
+                        data:[
+                          
+                          {
+                            url: '/login',
+                            image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png',
+                            label:'数码'
+                          },
+                          {
+                            url: 'http://www.didichuxing.com/',
+                            image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png',
+                            label:'数码'
+                          },
+                          {
+                            url: 'http://www.didichuxing.com/',
+                            image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide03.png',
+                            label:'数码'
+                          },
+                          {
+                            url: '/login',
+                            image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png',
+                            label:'数码'
+                          },
+                          {
+                            url: 'http://www.didichuxing.com/',
+                            image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png',
+                            label:'数码'
+                          },
+                          {
+                            url: 'http://www.didichuxing.com/',
+                            image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide03.png',
+                            label:'数码'
+                          },
+                          {
+                            url: '/login',
+                            image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png',
+                            label:'数码'
+                          },
+                          {
+                            url: 'http://www.didichuxing.com/',
+                            image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png',
+                            label:'数码'
+                          },
+                          {
+                            url: 'http://www.didichuxing.com/',
+                            image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide03.png',
+                            label:'数码'
+                          }
+                        ]
+                      })
+                      break
+                    case '1' :
+                      res.json({
+                        data:[
+                          
+                          {
+                            url: '/login',
+                            image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png',
+                            label:'美食'
+                          },
+                          {
+                            url: 'http://www.didichuxing.com/',
+                            image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png',
+                            label:'美食'
+                          },
+                          {
+                            url: 'http://www.didichuxing.com/',
+                            image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide03.png',
+                            label:'美食'
+                          },
+                          {
+                            url: '/login',
+                            image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png',
+                            label:'美食'
+                          },
+                          {
+                            url: 'http://www.didichuxing.com/',
+                            image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png',
+                            label:'美食'
+                          },
+                          {
+                            url: 'http://www.didichuxing.com/',
+                            image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide03.png',
+                            label:'美食'
+                          },
+                          {
+                            url: '/login',
+                            image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png',
+                            label:'美食'
+                          },
+                          {
+                            url: 'http://www.didichuxing.com/',
+                            image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png',
+                            label:'美食'
+                          },
+                          {
+                            url: 'http://www.didichuxing.com/',
+                            image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide03.png',
+                            label:'美食'
+                          }
+                        ]
+                      })
+                      break
+                    default:
+                        res.json({
+                          data:[
+                            
+                            {
+                              url: '/login',
+                              image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png',
+                              label:'美食'
+                            },
+                            {
+                              url: 'http://www.didichuxing.com/',
+                              image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png',
+                              label:'美食'
+                            },
+                            {
+                              url: 'http://www.didichuxing.com/',
+                              image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide03.png',
+                              label:'美食'
+                            },
+                            {
+                              url: '/login',
+                              image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png',
+                              label:'美食'
+                            },
+                            {
+                              url: 'http://www.didichuxing.com/',
+                              image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png',
+                              label:'美食'
+                            },
+                            {
+                              url: 'http://www.didichuxing.com/',
+                              image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide03.png',
+                              label:'美食'
+                            },
+                            {
+                              url: '/login',
+                              image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png',
+                              label:'美食'
+                            },
+                            {
+                              url: 'http://www.didichuxing.com/',
+                              image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png',
+                              label:'美食'
+                            },
+                            {
+                              url: 'http://www.didichuxing.com/',
+                              image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide03.png',
+                              label:'美食'
+                            }
+                          ]
+                        })
+                        break
+                  }
+              })
             }
         }        
     },
