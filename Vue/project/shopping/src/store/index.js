@@ -8,7 +8,7 @@ export default new Vuex.Store({
     token:''
   },
   mutations: {
-    //设置vuex的token
+    //??token
     setToken(state, token){
       state.token = token
     }

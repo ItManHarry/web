@@ -14,9 +14,9 @@
 	
 	4. http请求功能axios
 	
-## anxios
+## axios
 
-- 安装：npm install anxios
+- 安装：npm install axios
 
 使用：main.js
 
@@ -61,6 +61,22 @@
 			}
 		)
 	}
+```
+
+## ElementUI
+
+- 安装(https://element.eleme.cn/#/zh-CN/component/installation)
+
+```	
+	npm i element-ui -S
+```
+
+- vue引入(https://github.com/ElementUI/vue-cli-plugin-element)
+
+```javascript
+	vue create my-app
+	cd my-app
+	vue add element
 ```
 
 ## vuex存储
@@ -141,4 +157,10 @@
 		  }
 		]
 	  }
+```
+
+4. npm清除缓存
+
+```
+	npm cache clean -f
 ```

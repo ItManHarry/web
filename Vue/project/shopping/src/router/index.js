@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 
 Vue.use(VueRouter)
@@ -12,55 +10,49 @@ Vue.use(VueRouter)
     name: 'index',
     redirect:'/login' //重定向
   },{
-    path: '/register',
-    name: 'register',
-    component:Register
-  },{
     path: '/login',
     name: 'Login',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
-  },
-  {
-    path: '/index',
-    name: 'Index',
-    component: () => import('../views/Index.vue')
-  },
-  {
-    path: '/footer',
-    name: 'Footer',
-    component: () => import('../views/Footer.vue'),
+    component: () => import('../views/Login.vue')
+  },{
+    path: '/register',
+    name: 'Register',
+    component: () => import('../views/Register.vue')
+  },{
+    path: '/home',
+    name: 'Home',
+    component: () => import('../views/Home.vue'),
     children:[
       {
         path:'',
-        name:'Home',
-        redirect:'index'
+        name:'Index',
+        redirect:'main'
       },
       {
-        path: 'index',
-        name: 'Index',
-        component: () => import('../views/Index.vue')
+        path: 'main',
+        name: 'Main',
+        component: () => import('../views/Main.vue')
       },
       {
         path: 'lists',
-        name: 'Index',
+        name: 'Lists',
         component: () => import('../views/Lists.vue')
       },
       {
         path: 'search',
-        name: 'Index',
+        name: 'Search',
         component: () => import('../views/Search.vue')
       },
       {
         path: 'cart',
-        name: 'Index',
+        name: 'Cart',
         component: () => import('../views/Cart.vue')
       },
       {
         path: 'mine',
-        name: 'Index',
+        name: 'Mine',
         component: () => import('../views/Mine.vue')
       }
     ]

@@ -24,6 +24,10 @@
         <el-menu-item index="3" disabled>消息中心</el-menu-item>
         <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
       </el-menu>
+      <i class="el-icon-edit"></i>
+      <i class="el-icon-share"></i>
+      <i class="el-icon-delete"></i>
+      <el-button type="primary" icon="el-icon-search">搜索</el-button>
   </div>
 </template>
 
