@@ -48,11 +48,17 @@ Vue.use(VueRouter)
       {
         path: 'cart',
         name: 'Cart',
+        meta:{
+          requireAuth:true //需要登录后才能进入
+        },
         component: () => import('../views/Cart.vue')
       },
       {
         path: 'mine',
         name: 'Mine',
+        meta:{
+          requireAuth:true //需要登录后才能进入
+        },
         component: () => import('../views/Mine.vue')
       }
     ]

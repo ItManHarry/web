@@ -90,7 +90,12 @@ export default {
                     this.$store.commit('setToken', result.token)
                     window.localStorage.setItem('token', result.token)
                     //防止回退至登录页面,此处使用replace方法进行跳转
-                    this.$router.replace({path:'/home'})
+                    //判断是否需要重定向，如果需要就跳转至对应的页面，否则跳转到主页
+                    if(this.$route.query.redirect){
+                        this.$router.replace({path:this.$route.query.redirect})
+                    }else{
+                        this.$router.replace({path:'/home'})
+                    }                    
                 }else{
                     alert(result.message)
                 }

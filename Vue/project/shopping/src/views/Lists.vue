@@ -80,10 +80,19 @@ export default {
     created(){
         //获取默认的分类数据
         this.getClassify(0)
+    },
+    mounted(){
+        //设置滚动盒子的高度
+        const leftPanel = document.querySelector(".leftPanel")
+        const rightPanel = document.querySelector(".rightPanel")
+        const bodyHeight = document.documentElement.clientHeight
+        //alert('Body height : ' + bodyHeight)
+        leftPanel.style.height = (bodyHeight - 50) + "px"
+        rightPanel.style.height = (bodyHeight - 50) + "px"
     }
 }
 </script>
-<style scoped lang = "stylus">
+<style lang = "stylus">
     .panels
         display flex
         .leftPanel

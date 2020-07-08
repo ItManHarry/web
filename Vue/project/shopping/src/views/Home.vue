@@ -64,6 +64,28 @@ export default {
           break
       }
     }
+  },
+  created(){
+    switch(this.$route.path){
+      case '/home/main':
+          this.selectedLabelDefault = '首页'
+          break
+      case '/home/lists':
+          this.selectedLabelDefault = '分类'
+          break
+      case '/home/search':
+          this.selectedLabelDefault = '搜索'
+          break
+      case '/home/cart':
+          this.selectedLabelDefault = '购物车'
+          break
+      case '/home/mine':
+          this.selectedLabelDefault = '我的'
+          break
+      default:
+          this.selectedLabelDefault = '首页'
+          break
+    }
   }
 }
 </script>
