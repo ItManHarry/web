@@ -11,7 +11,10 @@ Vue.config.productionTip = false
 Vue.prototype.$http = axios
 //路由守卫
 router.beforeEach((to, from, next) => {
-  //无论是刷新还是跳转路由，此钩子函数必然会执行
+  /*
+    1. 无论是刷新还是跳转路由，此钩子函数必然会执行
+    2. 刷新会导致vuex中的值丢失，顾先从本地存储获取token后设置给vuex
+  */
   store.commit('setToken', localStorage.getItem('token'))
   if(to.meta.requireAuth){
     if(store.state.token){
