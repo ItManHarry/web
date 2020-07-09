@@ -11,7 +11,7 @@
             <ul>
                 <li v-for = "(tag, index) in tags" :key = "index">
                     <img :src = "tag.image"/>
-                    <p>{{tag.label}}</p>
+                    <p>{{tag.label}} <i class = "cubeic-add" @click = "addCart($event, tag)"></i></p>
                 </li>
             </ul>
         </cube-scroll>
@@ -75,6 +75,11 @@ export default {
                     v.active = false
             })
             this.getClassify(index)
+        },
+        //添加商品到购物车
+        addCart(e,tag){
+            //alert(tag.label)
+            this.$store.commit('setCarts', tag)
         }
     },
     created(){
@@ -120,4 +125,6 @@ export default {
                     img 
                         width 80px
                         height 80px
+                    .cubeic-add
+                        font-size 18px
 </style>

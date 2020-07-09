@@ -10,9 +10,11 @@
             @change="changeHandler" 
             class = "footnav">
         </cube-tab-bar>
+        <span class = "countSum">{{countSum}}</span>
     </div>
 </template>
 <script>
+import {mapGetters} from "vuex"
 export default {
   data () {
     return {
@@ -35,6 +37,11 @@ export default {
         icon: 'cubeic-person'
       }]
     }
+  },
+  computed:{
+    ...mapGetters({
+      countSum:'countSum'
+    })
   },
   methods: {
     clickHandler (label) {
@@ -114,4 +121,16 @@ export default {
       opacity 0
       -webkit-transform   translate(100%, 0)
       transform translate(-100%, 0)
+    .countSum
+      position  fixed
+      bottom 33px
+      right 23%
+      z-index 1001
+      width 18px
+      height 18px
+      line-height 18px
+      border-radius 50%
+      font-size 14px
+      background  red
+      color #fff
 </style>
