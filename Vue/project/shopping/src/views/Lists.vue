@@ -115,6 +115,7 @@ export default {
             inner.style.transform = `translate3d(${x}px,0,0)`
         },
         enter(el, done){
+            document.body.offsetHeight 
             el.style.transform = `translate3d(0,0,0)`
             const inner = el.querySelector('.inner')
             inner.style.transform = `translate3d(0,0,0)`
