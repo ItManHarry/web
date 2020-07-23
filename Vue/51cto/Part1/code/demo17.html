@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo 17 修改数据视图不刷新处理</title>
+	</head>
+	<body>		
+		<div id = "app">
+			<ul>
+				<li v-for = "(item, index) in datas" :key = "index">
+					{{item}}
+				</li>
+			</ul>
+			<button @click = "addPro()">Add Property</button>
+			<hr>
+			<ul>
+				<li v-for = "(item, index) in list" :key = "index">
+					{{item}}
+				</li>
+			</ul>
+			<button @click = "addItem()">Add Item</button>
+		</div>
+	</body>
+	<script type = "text/javascript" src = "vue.js"></script>	
+	<script type = "text/javascript">		
+		new Vue({
+			el:"#app",		
+			data(){
+				return {
+					datas:{
+						'a':'I am A',
+						'b':'I am B',
+						'c':'I am C',
+						'd':'I am D'
+					},
+					list:[
+						1,2,3,4
+					]
+				}
+			},
+			methods:{			
+				addPro(){
+					//this.datas.e = "I am E"
+					this.$set(this.datas, 'e', 'I am E')
+					console.log(this.datas)
+				},
+				addItem(){
+					this.list.push(5)
+					console.log(this.list)
+				}
+			},
+			mounted(){
+				
+			}
+		})
+	</script>
+</html>

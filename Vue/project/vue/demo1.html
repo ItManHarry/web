@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo 1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        Name : {{name}}, mobile phone : {{phone}}, Number : {{count+1}}
+        <p>{{greet()}}</p>
+        <button @click = "hi()">Hi</button>
+        {{count}}
+        <div class="canvas" @mousemove = "changeXY">
+            {{x}},{{y}}
+        </div>
+        <a :href="url">百度</a>
+        <input type="text" name = "name" v-model = "name">
+        <div v-html = "tag"></div>
+        <div>z is : {{z}}</div>
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data(){
+                return {
+                    name:'Cheng Guoqian',
+                    phone:'13780924007',
+                    count : 0,
+                    x:0,
+                    y:0,
+                    url:'https://www.baidu.com',
+                    tag:"<p style = 'color:red'>Tag</p>"
+                }
+            },
+            computed:{
+                z(){
+                    return this.x + this.y
+                }
+            },
+            methods:{
+                greet(){
+                    //return 'My phone is :' + this.phone
+                    return `My phone is ${this.phone}`
+                },
+                hi(){
+                    //alert('Hi,everyone...')
+                    this.count ++
+                },
+                changeXY(event){
+                    //console.log(event)
+                    this.x = event.offsetX
+                    this.y = event.offsetY
+                }
+            }
+        })
+    </script>
+    <style>
+        .canvas{
+            width:600px;
+            padding: 20px 20px;
+            text-align: center;
+            border:solid 1px #ccc;
+        }
+    </style>
+</body>
+</html>
