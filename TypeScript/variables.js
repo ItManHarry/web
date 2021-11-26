@@ -57,36 +57,3 @@ console.log("静态变量:":Numbers.sval)   // 静态变量
 var obj = new Numbers(); 
 console.log("实例变量:"+obj.num_val)
 console.log("局部变量:" + obj.storeNum())
-//循环
-let array1 = [1,2,3,4,5,6,7,8,9,10]
-for(let i = 0; i < array1.length; i++){
-    console.log('Element is : ' + array1[i])
-}
-for(let e in array1)
-    console.log('Element : ' + e)
-for(let e of array1)
-    console.log('Element of array1 : ' + e)
-array1.forEach((v, i, array) => {
-    console.log('Index is(forEach) : ' + i)
-    console.log('Value is(forEach) : ' + v)
-    console.log('Array is(forEach) : ' + array)
-})
-array1.every((v, i, array) => {
-    console.log('Index is(every) : ' + i)
-    console.log('Value is(every) : ' + v)
-    console.log('Array is(every) : ' + array)
-    if(i == 3)
-        return false
-    else
-        return true
-})
-let cnt = 100
-while(cnt >= 50){
-    console.log('Count is(while) : ' + cnt)
-    cnt--
-}
-cnt = 20
-do{
-    console.log('Count is(do while) : ' + cnt)
-    cnt++
-}while(cnt <= 15)
