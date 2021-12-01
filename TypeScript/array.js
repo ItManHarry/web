@@ -87,12 +87,12 @@ values.forEach(v => {
 /**
  * 数组方法
  * concat():连接两个或更多的数组，并返回结果
- * every():检测数值元素的每个元素是否都符合条件
+ * every():检测数值元素的每个元素是否都符合条件,返回true/false
  * filter():检测数值元素，并返回符合条件所有元素的数组
  * forEach():数组每个元素都执行一次回调函数
  * indexOf():搜索数组中的元素，并返回它所在的位置。如果搜索不到，返回值 -1，代表没有此项
  * join():把数组的所有元素放入一个字符串
- * lastIndexOf():返回一个指定的字符串值最后出现的位置，在一个字符串中的指定位置从后向前搜索
+ * lastIndexOf():返回一个指定的元素最后出现的位置，在一个数组中的指定位置从后向前搜索
  * map():通过指定函数处理数组的每个元素，并返回处理后的数组
  * pop():删除数组的最后一个元素并返回删除的元素
  * push():向数组的末尾添加一个或更多元素，并返回新的长度
@@ -107,3 +107,82 @@ values.forEach(v => {
  * toString():把数组转换为字符串，并返回结果
  * unshift():向数组的开头添加一个或更多元素，并返回新的长度
  */
+var array_1 = ['a','b','c','d','e','f','g']
+var array_2 = [1,2,3,4,5,6]
+var concat_array = array_1.concat(array_2)
+console.log('Concat array is : ' + concat_array)
+concat_array.forEach(v => {
+    console.log('Element type is : ' + typeof(v) + ' and value is : ' + v)
+})
+function isBiggerThanTen(element, index, array){
+    return element >= 10
+}
+var check_array1:number[] = new Array(10, 20, 5, 30, 100)
+var check_reuslt1 = check_array1.every(isBiggerThanTen)
+console.log('Check result 1 : ' + check_reuslt1)
+var check_array2:number[] = new Array(10, 20, 50, 30, 100)
+var check_reuslt2 = check_array2.every(isBiggerThanTen)
+console.log('Check result 2 : ' + check_reuslt2)
+var ok_array = check_array1.filter(isBiggerThanTen)
+console.log('OK element array : ' + ok_array)
+ok_array.forEach(v => {
+    console.log('OK element is : ' + v)
+})
+var e_index_3 = array_2.indexOf(3)
+var e_index_9 = array_2.indexOf(9)
+console.log('Index of 3 : ' + e_index_3 + ', index of 9 : ' + e_index_9)
+console.log('Array 2 join : ' + array_2.join())
+var e_last_index_3 = array_2.lastIndexOf(3)
+var e_last_index_9 = array_2.lastIndexOf(9)
+console.log('Last index of 3 : ' + e_last_index_3 + ', last index of 9 : ' + e_last_index_9)
+var sqrts = [1,4,9,16]
+var roots = sqrts.map(Math.sqrt)
+console.log('Roots are : ' + roots)
+var new_results = sqrts.map((v)=>{
+    return v -= 1
+})
+console.log('New result is : ' + new_results)
+console.log('Before pop the array is : ' + sqrts)
+var poped = sqrts.pop()
+console.log('Poped element is : ' + poped)
+console.log('After pop the array is : ' + sqrts)
+var new_length = sqrts.push(20)
+console.log('After pushed the array length is : ' + new_length + ', and the array is : ' + sqrts)
+var reduce_left = [1,2,3,4,5,6].reduce((x, y)=>{
+    return x + y
+})
+console.log('Reduced left value is : ' + reduce_left)
+var reduce_right = [10,20,30,40,50,60].reduceRight((x, y)=>{
+    return x + y
+})
+console.log('Reduced right value is : ' + reduce_right)
+var reversed_array = [0,1,2,3,4].reverse()
+console.log('Reversed array is : ' + reversed_array)
+var first_element = [10,2.3,5,6].shift()
+console.log('First element is : ' + first_element)
+var o_a = ['a','b','c','d','e','f']
+var n_a1 = o_a.slice(1,3)
+var n_a2 = o_a.slice(3,5)
+console.log('Old array is : ' + o_a)
+console.log('New array 1 : ' + n_a1)
+console.log('New array 2 : ' + n_a2)
+var big_than_5 = [1,2,3,4].some((v) => {
+    return v > 5
+})
+console.log('Array has element bigger than 5 ? ' + (big_than_5 ? 'YES' : 'NO'))
+o_a = ['v','c','a','d','b','f']
+var s_a = o_a.sort()
+//sort改变原数组，无需使用新的变量接收
+console.log('Before sorted : ' + o_a)
+console.log('After sorted : ' + s_a)
+o_a = ['orange','mango','banana','sugar','apple']
+var splice_e = o_a.splice(2, 0 , 'water')
+console.log('After splice the array is : ' + o_a)
+console.log('Splice element is : ' + splice_e)
+console.log('To string : ' + o_a.toString())
+var splice_e2 = o_a.splice(3, 1)
+console.log('After splice for the seconde time : ' + o_a)
+var unshifted_length = o_a.unshift('pear')
+console.log('After unshifted array length is : ' + unshifted_length + ', and the array is : ' + o_a)
+unshifted_length = o_a.unshift('a','b','c','d')
+console.log('After unshifted 2 array length is : ' + unshifted_length + ', and the array is : ' + o_a)
